@@ -214,6 +214,8 @@ Out of scope for this phase: any rule changes beyond what the package brings; ch
 
 Precondition: the inline-files change currently uncommitted in the museum repo is reviewed and committed first (branch, PR), so this phase is a clean diff on top.
 
+Dry run on 2026-09-06 against the locally packed 999.9.9 with `DotNetCodeQualityStrict=false`, the ETL folder pinned to `App`, and the .editorconfig reduced to its three folder sections: the whole solution built with 22 diagnostics, 21 CA2007 in the reusable libraries (Seo.Sitemap 9, Lucene.Search 6, ExtendedContentPicker 5, Seo.Robots 2) and 1 RS0030. Nothing else changed, so the package reproduces the inline configuration exactly. All files were restored after the run.
+
 - [ ] `Directory.Build.props`: keep `UmbracoVersion`; add `<PackageReference Include="DotNetCodeQuality" Version="1.0.0" />`; remove the analysis property block, the test NoWarn group, the `GlobalAnalyzerConfigFiles`/`AdditionalFiles` items, the Sonar and SecurityCodeScan package references
 - [ ] Delete `Sonar.globalconfig` and `SonarLint.xml`
 - [ ] `.editorconfig`: remove every rule the package now carries (style, naming, CA adjustments, IDE unused rules, SCS0005); keep `root = true`, the migrations section (`generated_code = true`, S138 none), the ContentSeeding section, the view-component section

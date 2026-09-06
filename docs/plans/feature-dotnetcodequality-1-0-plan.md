@@ -131,7 +131,7 @@ Out of scope for this phase: generating configs for any other analyzer.
 - [x] `tools/SonarConfigGenerator` console project (net10.0): references `Microsoft.CodeAnalysis.CSharp` and `Microsoft.CodeAnalysis.Workspaces.Common` 5.0.0; locates `SonarAnalyzer.CSharp.dll` in the NuGet cache for the version referenced by `src/DotNetCodeQuality/DotNetCodeQuality.csproj` (read the csproj); enumerates `DiagnosticAnalyzer.SupportedDiagnostics` tolerating `ReflectionTypeLoadException`
 - [x] Reads the enabled list from the existing `Sonar.globalconfig` (the `# Enabled` section), rewrites the file: header, `# Enabled` entries as `warning`, `# Sonar defaults switched off` with every other default-enabled rule as `none`, each preceded by its Sonar title comment
 - [x] `--check` mode: exit 1 with a diff summary when the committed file differs from the generated one
-- [ ] Wire `dotnet run --project tools/SonarConfigGenerator -- --check` into the CI job (Phase 5)
+- [x] Wire `dotnet run --project tools/SonarConfigGenerator -- --check` into the CI job (Phase 5)
 
 ### Acceptance criteria
 1. Running the generator on the current Sonar version reproduces the committed file byte for byte.
@@ -189,11 +189,11 @@ Package changes forced by the tests:
 - The `GetAwaiter().GetResult()` bans are dropped: xunit.v3's generated entry point uses that idiom, so every xunit.v3 consumer would have failed.
 
 ## Phase 5: CI and first release
-Status: Not started
+Status: In progress
 Out of scope for this phase: museum adoption.
 
-- [ ] `.github/workflows/ci.yml`: on push and PR; `actions/setup-dotnet` with `6.0.x`, `8.0.x`, `9.0.x`, `10.0.x`; `dotnet pack` → `NuGetDirectory`; `dotnet test`; generator `--check`; upload nupkg artifact
-- [ ] `.github/workflows/release.yml`: on tag `v*`; `dotnet pack` (MinVer derives the version from the tag); `dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate`
+- [x] `.github/workflows/ci.yml`: on push and PR; `actions/setup-dotnet` with `6.0.x`, `8.0.x`, `9.0.x`, `10.0.x`; `dotnet pack` → `NuGetDirectory`; `dotnet test`; generator `--check`; upload nupkg artifact
+- [x] `.github/workflows/release.yml`: on tag `v*`; `dotnet pack` (MinVer derives the version from the tag); `dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate`
 - [ ] User action: create a nuget.org API key scoped to `DotNetCodeQuality` push and store it as repo secret `NUGET_API_KEY`
 - [ ] Tag `v1.0.0`, push, confirm the package page on nuget.org shows README, MIT, two dependencies
 

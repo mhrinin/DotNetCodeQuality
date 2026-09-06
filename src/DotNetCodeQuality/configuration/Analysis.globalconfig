@@ -10,8 +10,10 @@ dotnet_diagnostic.IDE0060.severity = warning
 # CA1716/CA1720 - identifiers that clash with VB keywords or contain type names (Object, Event, Integer)
 # CA1816 - GC.SuppressFinalize in Dispose; only matters for types with finalizers
 # CA1848/CA1873 - LoggerMessage delegates / lazy log-argument evaluation
+# CA1826 - indexer instead of FirstOrDefault()/Last() on lists; nanoseconds at the cost of readability
 dotnet_diagnostic.CA1716.severity = none
 dotnet_diagnostic.CA1720.severity = none
 dotnet_diagnostic.CA1816.severity = none
 dotnet_diagnostic.CA1848.severity = none
 dotnet_diagnostic.CA1873.severity = none
+dotnet_diagnostic.CA1826.severity = none

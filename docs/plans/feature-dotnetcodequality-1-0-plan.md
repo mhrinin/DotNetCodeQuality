@@ -125,12 +125,12 @@ Package project, props, targets, shims and eight configuration files written. Tw
 Verified with a scratch console consumer restoring 999.9.9 from `artifacts/`: strict build fails with CS0219, IDE0011, IDE0059, IDE0161, RS0030, S1481; `DotNetCodeQualityStrict=false` reports the same as warnings and exits 0; `new DateTime(2020,1,1)` raises no S6562, proving the Sonar off-list is applied; the nuspec lists the two dependencies with `developmentDependency=true` and the package has no `lib/`.
 
 ## Phase 3: Sonar config generator
-Status: Not started
+Status: Complete
 Out of scope for this phase: generating configs for any other analyzer.
 
-- [ ] `tools/SonarConfigGenerator` console project (net10.0): references `Microsoft.CodeAnalysis.CSharp` and `Microsoft.CodeAnalysis.Workspaces.Common` 5.0.0; locates `SonarAnalyzer.CSharp.dll` in the NuGet cache for the version referenced by `src/DotNetCodeQuality/DotNetCodeQuality.csproj` (read the csproj); enumerates `DiagnosticAnalyzer.SupportedDiagnostics` tolerating `ReflectionTypeLoadException`
-- [ ] Reads the enabled list from the existing `Sonar.globalconfig` (the `# Enabled` section), rewrites the file: header, `# Enabled` entries as `warning`, `# Sonar defaults switched off` with every other default-enabled rule as `none`, each preceded by its Sonar title comment
-- [ ] `--check` mode: exit 1 with a diff summary when the committed file differs from the generated one
+- [x] `tools/SonarConfigGenerator` console project (net10.0): references `Microsoft.CodeAnalysis.CSharp` and `Microsoft.CodeAnalysis.Workspaces.Common` 5.0.0; locates `SonarAnalyzer.CSharp.dll` in the NuGet cache for the version referenced by `src/DotNetCodeQuality/DotNetCodeQuality.csproj` (read the csproj); enumerates `DiagnosticAnalyzer.SupportedDiagnostics` tolerating `ReflectionTypeLoadException`
+- [x] Reads the enabled list from the existing `Sonar.globalconfig` (the `# Enabled` section), rewrites the file: header, `# Enabled` entries as `warning`, `# Sonar defaults switched off` with every other default-enabled rule as `none`, each preceded by its Sonar title comment
+- [x] `--check` mode: exit 1 with a diff summary when the committed file differs from the generated one
 - [ ] Wire `dotnet run --project tools/SonarConfigGenerator -- --check` into the CI job (Phase 5)
 
 ### Acceptance criteria
@@ -144,7 +144,7 @@ Out of scope for this phase: generating configs for any other analyzer.
 - `dotnet run --project tools/SonarConfigGenerator -- --check` → exit 0, "Sonar.globalconfig is up to date".
 
 ### Phase Summary
-_(write when phase completes)_
+`tools/SonarConfigGenerator` (net10.0 console, references Microsoft.CodeAnalysis.CSharp + Workspaces.Common 5.0.0) reads the Sonar version from the package csproj, finds the DLL in the NuGet cache (NUGET_PACKAGES, `dotnet nuget locals`, or ~/.nuget/packages), enumerates analyzers tolerating ReflectionTypeLoadException, keeps the `# Enabled` list from the committed file and regenerates the off-list with titles. Verified: `--check` exits 0 on the committed file; deleting one rule makes `--check` exit 1 naming S6562 as new; plain run reproduces the committed file with no git diff. CI wiring is a Phase 5 checkbox.
 
 ## Phase 4: Package test harness
 Status: Not started

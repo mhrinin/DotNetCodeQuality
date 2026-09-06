@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <PackageId>DotNetCodeQuality</PackageId>
+    <Authors>Mykhailo Hrinin</Authors>
+    <Description>Agentic Code Quality for .NET. One PackageReference that makes the build enforce code quality: analyzer defaults, style rules, curated Sonar rules with thresholds, banned APIs, dependency audit and project-type profiles. Warnings are errors by default.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/mhrinin/DotNetCodeQuality</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mhrinin/DotNetCodeQuality</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>analyzers;code-quality;roslyn;sonar;msbuild;globalconfig;editorconfig;warnings-as-errors;agents</PackageTags>
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.33.0.1635" PrivateAssets="none" />
+    <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="5.6.0" PrivateAssets="none" />
+    <PackageReference Include="MinVer" Version="8.0.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="build\**" Pack="true" PackagePath="build\" />
+    <None Include="buildTransitive\**" Pack="true" PackagePath="buildTransitive\" />
+    <None Include="buildMultiTargeting\**" Pack="true" PackagePath="buildMultiTargeting\" />
+    <None Include="configuration\**" Pack="true" PackagePath="configuration\" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" Visible="false" />
+  </ItemGroup>
+
+</Project>

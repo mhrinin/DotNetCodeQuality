@@ -78,12 +78,12 @@ DotNetCodeQuality/
 **Profile detection (in `.targets`, after the project body):** explicit `DotNetCodeQualityProfile` → else `Test` when `IsTestProject`/`TestProject`/`XunitTestProject` is `true` or a `PackageReference` matches `xunit*`, `NUnit`, `MSTest.TestFramework` → else `Library` when `OutputType` is `Library` and `UsingMicrosoftNETSdkWeb` is not `true` → else `App`.
 
 ## Phase 1: Repository bootstrap
-Status: Not started
+Status: Complete
 Out of scope for this phase: any MSBuild content.
 
-- [ ] `git init` in `D:\Projects\DotNetCodeQuality` (the folder already holds `docs/plans/` with this plan)
-- [ ] Add `README.md` (title, tagline "Agentic Code Quality for .NET", one paragraph on why build-enforced rules matter for agents, install snippet, property table, "what stays in your repo" section, precedence note), `LICENSE` (MIT, copyright Mykhailo Hrinin), `.gitignore` (dotnet), `.editorconfig` (formatting only: indent, charset, final newline), `global.json` pinning the 10.0.x SDK with `rollForward: latestFeature`
-- [ ] `gh repo create mhrinin/DotNetCodeQuality --public --description "Agentic Code Quality for .NET"`; first commit and push; enable Actions
+- [x] `git init` in `D:\Projects\DotNetCodeQuality` (the folder already holds `docs/plans/` with this plan)
+- [x] Add `README.md` (title, tagline "Agentic Code Quality for .NET", one paragraph on why build-enforced rules matter for agents, install snippet, property table, "what stays in your repo" section, precedence note), `LICENSE` (MIT, copyright Mykhailo Hrinin), `.gitignore` (dotnet), `.editorconfig` (formatting only: indent, charset, final newline), `global.json` pinning the 10.0.x SDK with `rollForward: latestFeature`
+- [x] `gh repo create mhrinin/DotNetCodeQuality --public --description "Agentic Code Quality for .NET"`; first commit and push; enable Actions
 
 ### Acceptance criteria
 1. `https://github.com/mhrinin/DotNetCodeQuality` is public, contains the README, license and this plan.
@@ -92,18 +92,18 @@ Out of scope for this phase: any MSBuild content.
 - `gh repo view mhrinin/DotNetCodeQuality --json visibility,description` → `PUBLIC`, tagline present.
 
 ### Phase Summary
-_(write when phase completes)_
+Repo `mhrinin/DotNetCodeQuality` created public on 2026-09-06 with README (tagline, install, property table, precedence), MIT license, dotnet .gitignore, formatting-only .editorconfig, global.json (10.0.100, latestFeature) and this plan. Verified: `gh repo view` reports PUBLIC with the tagline.
 
 ## Phase 2: Package project, props, targets, configuration
-Status: Not started
+Status: Complete
 Out of scope for this phase: tests, generator tool, CI, publishing.
 
-- [ ] `src/DotNetCodeQuality/DotNetCodeQuality.csproj`: `TargetFramework=netstandard2.0`, `IncludeBuildOutput=false`, `DevelopmentDependency=true`, `NoWarn` NU5128, `PackageId/Authors/Description/PackageLicenseExpression=MIT/PackageReadmeFile/RepositoryUrl/PackageTags`; `PackageReference` to `SonarAnalyzer.CSharp` 10.33.0.1635 and `Microsoft.CodeAnalysis.BannedApiAnalyzers` 5.6.0 with `PrivateAssets="none"` and `ExcludeAssets="all"` so they appear as nuspec dependencies without running in the package project; `MinVer` 8.0.0 with `PrivateAssets="all"`, `MinVerTagPrefix=v`; `None` items packing `build/**`, `buildTransitive/**`, `buildMultiTargeting/**`, `configuration/**` to the package root
-- [ ] `build/DotNetCodeQuality.props`: every default guarded by `Condition="'$(X)' == ''"`; `DotNetCodeQuality*` property defaults; strict block (`TreatWarningsAsErrors`, `WarningsAsErrors` += NU1901;NU1902;NU1903;NU1904) conditioned on `DotNetCodeQualityStrict == true`; `NoWarn` += CS1591; CI detection matrix (`GITHUB_ACTIONS`, `TF_BUILD`, `CI`, `GITLAB_CI`, `TEAMCITY_VERSION`, `BITBUCKET_BUILD_NUMBER`) → `ContinuousIntegrationBuild=true`
-- [ ] `build/DotNetCodeQuality.targets`: profile detection property group; `GlobalAnalyzerConfigFiles` items for `Analysis`, `Style` (when Style true), `Sonar` (when Sonar true), `Profile.$(DotNetCodeQualityProfile)`; `AdditionalFiles` for `$(DotNetCodeQualitySonarLintXml)` (when Sonar true) and `BannedSymbols.txt` (when BannedSymbols true), all `Visible="false"`; target `DotNetCodeQualityRemoveSonar` `BeforeTargets="CoreCompile"` with `<Analyzer Remove="@(Analyzer)" Condition="'%(Filename)' == 'SonarAnalyzer.CSharp'" />` when Sonar false
-- [ ] Shims in `buildTransitive/` and `buildMultiTargeting/`
-- [ ] `configuration/Analysis.globalconfig`, `Style.globalconfig` (all rules from `claude_rules/dotnet/.editorconfig`, no section headers), `Sonar.globalconfig` (copy from museum), `Profile.Library.globalconfig`, `Profile.Test.globalconfig`, `SonarLint.xml` (copy), `BannedSymbols.txt` (six entries with messages: use `TimeProvider`/`UtcNow`; use `await`; use `Task.Delay`)
-- [ ] `dotnet pack -c Release -o artifacts` locally; inspect the nupkg listing and nuspec
+- [x] `src/DotNetCodeQuality/DotNetCodeQuality.csproj`: `TargetFramework=netstandard2.0`, `IncludeBuildOutput=false`, `DevelopmentDependency=true`, `NoWarn` NU5128, `PackageId/Authors/Description/PackageLicenseExpression=MIT/PackageReadmeFile/RepositoryUrl/PackageTags`; `PackageReference` to `SonarAnalyzer.CSharp` 10.33.0.1635 and `Microsoft.CodeAnalysis.BannedApiAnalyzers` 5.6.0 with `PrivateAssets="none"` and `ExcludeAssets="all"` so they appear as nuspec dependencies without running in the package project; `MinVer` 8.0.0 with `PrivateAssets="all"`, `MinVerTagPrefix=v`; `None` items packing `build/**`, `buildTransitive/**`, `buildMultiTargeting/**`, `configuration/**` to the package root
+- [x] `build/DotNetCodeQuality.props`: every default guarded by `Condition="'$(X)' == ''"`; `DotNetCodeQuality*` property defaults; strict block (`TreatWarningsAsErrors`, `WarningsAsErrors` += NU1901;NU1902;NU1903;NU1904) conditioned on `DotNetCodeQualityStrict == true`; `NoWarn` += CS1591; CI detection matrix (`GITHUB_ACTIONS`, `TF_BUILD`, `CI`, `GITLAB_CI`, `TEAMCITY_VERSION`, `BITBUCKET_BUILD_NUMBER`) → `ContinuousIntegrationBuild=true`
+- [x] `build/DotNetCodeQuality.targets`: profile detection property group; `GlobalAnalyzerConfigFiles` items for `Analysis`, `Style` (when Style true), `Sonar` (when Sonar true), `Profile.$(DotNetCodeQualityProfile)`; `AdditionalFiles` for `$(DotNetCodeQualitySonarLintXml)` (when Sonar true) and `BannedSymbols.txt` (when BannedSymbols true), all `Visible="false"`; target `DotNetCodeQualityRemoveSonar` `BeforeTargets="CoreCompile"` with `<Analyzer Remove="@(Analyzer)" Condition="'%(Filename)' == 'SonarAnalyzer.CSharp'" />` when Sonar false
+- [x] Shims in `buildTransitive/` and `buildMultiTargeting/`
+- [x] `configuration/Analysis.globalconfig`, `Style.globalconfig` (all rules from `claude_rules/dotnet/.editorconfig`, no section headers), `Sonar.globalconfig` (copy from museum), `Profile.Library.globalconfig`, `Profile.Test.globalconfig`, `SonarLint.xml` (copy), `BannedSymbols.txt` (six entries with messages: use `TimeProvider`/`UtcNow`; use `await`; use `Task.Delay`)
+- [x] `dotnet pack -c Release -o artifacts` locally; inspect the nupkg listing and nuspec
 
 ### Acceptance criteria
 1. The nuspec lists exactly two dependencies (Sonar, BannedApi) and `developmentDependency=true`; the package has no `lib/` folder.
@@ -117,7 +117,12 @@ Out of scope for this phase: tests, generator tool, CI, publishing.
 - Scratch project build with a `DateTime.Now`: `dotnet build` exit 1 with `error RS0030`; with `-p:DotNetCodeQualityStrict=false`: exit 0 with `warning RS0030`.
 
 ### Phase Summary
-_(write when phase completes)_
+Package project, props, targets, shims and eight configuration files written. Two deviations from the plan, both forced by MSBuild behaviour discovered in testing:
+- Dependencies are declared with `PrivateAssets="none"` only. `ExcludeAssets="all"` removed them from the nuspec entirely. The Sonar and BannedApi analyzers therefore also run inside the package project, which has no compile items, so this is harmless.
+- Config files are added as `EditorConfigFiles`, not `GlobalAnalyzerConfigFiles`. The SDK converts `GlobalAnalyzerConfigFiles` to compiler inputs in a static ItemGroup in Microsoft.Managed.Core.targets, which is evaluated before a NuGet package's .targets is imported, so package-added items never reach csc. `EditorConfigFiles` is read by the Csc task at execution time and works from both static items and the profile target. Meziantou uses the same item.
+- Test-package detection uses `String.Contains` on a `;`-joined lower-cased `@(PackageReference)` list; MSBuild rejects a Regex property function whose pattern contains `(`, `)` or `,`.
+- The configuration directory is normalised with `System.IO.Path.GetFullPath` so paths contain no `..`.
+Verified with a scratch console consumer restoring 999.9.9 from `artifacts/`: strict build fails with CS0219, IDE0011, IDE0059, IDE0161, RS0030, S1481; `DotNetCodeQualityStrict=false` reports the same as warnings and exits 0; `new DateTime(2020,1,1)` raises no S6562, proving the Sonar off-list is applied; the nuspec lists the two dependencies with `developmentDependency=true` and the package has no `lib/`.
 
 ## Phase 3: Sonar config generator
 Status: Not started

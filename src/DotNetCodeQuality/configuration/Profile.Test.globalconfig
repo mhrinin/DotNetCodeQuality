@@ -1,0 +1,6 @@
+is_global = true
+
+# Test names use underscores; test data favours inline arrays and wide factory signatures
+dotnet_diagnostic.CA1707.severity = none
+dotnet_diagnostic.CA1861.severity = none
+dotnet_diagnostic.S107.severity = none

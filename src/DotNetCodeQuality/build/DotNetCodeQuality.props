@@ -1,0 +1,35 @@
+<Project>
+
+  <PropertyGroup>
+    <DotNetCodeQualityStrict Condition="'$(DotNetCodeQualityStrict)' == ''">true</DotNetCodeQualityStrict>
+    <DotNetCodeQualitySonar Condition="'$(DotNetCodeQualitySonar)' == ''">true</DotNetCodeQualitySonar>
+    <DotNetCodeQualityBannedSymbols Condition="'$(DotNetCodeQualityBannedSymbols)' == ''">true</DotNetCodeQualityBannedSymbols>
+    <DotNetCodeQualityStyle Condition="'$(DotNetCodeQualityStyle)' == ''">true</DotNetCodeQualityStyle>
+    <DotNetCodeQualityConfigurationDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../configuration/'))</DotNetCodeQualityConfigurationDirectory>
+    <DotNetCodeQualitySonarLintXml Condition="'$(DotNetCodeQualitySonarLintXml)' == ''">$(DotNetCodeQualityConfigurationDirectory)SonarLint.xml</DotNetCodeQualitySonarLintXml>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Nullable Condition="'$(Nullable)' == ''">enable</Nullable>
+    <ImplicitUsings Condition="'$(ImplicitUsings)' == ''">enable</ImplicitUsings>
+    <AnalysisLevel Condition="'$(AnalysisLevel)' == ''">latest</AnalysisLevel>
+    <AnalysisMode Condition="'$(AnalysisMode)' == ''">Recommended</AnalysisMode>
+    <EnforceCodeStyleInBuild Condition="'$(EnforceCodeStyleInBuild)' == ''">true</EnforceCodeStyleInBuild>
+    <GenerateDocumentationFile Condition="'$(GenerateDocumentationFile)' == ''">true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <Deterministic Condition="'$(Deterministic)' == ''">true</Deterministic>
+    <NuGetAudit Condition="'$(NuGetAudit)' == ''">true</NuGetAudit>
+    <NuGetAuditMode Condition="'$(NuGetAuditMode)' == ''">all</NuGetAuditMode>
+    <NuGetAuditLevel Condition="'$(NuGetAuditLevel)' == ''">low</NuGetAuditLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(DotNetCodeQualityStrict)' == 'true'">
+    <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == ''">true</TreatWarningsAsErrors>
+    <WarningsAsErrors>$(WarningsAsErrors);NU1901;NU1902;NU1903;NU1904</WarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ContinuousIntegrationBuild Condition="'$(ContinuousIntegrationBuild)' == '' and ('$(GITHUB_ACTIONS)' == 'true' or '$(TF_BUILD)' == 'true' or '$(CI)' == 'true' or '$(GITLAB_CI)' == 'true' or '$(TEAMCITY_VERSION)' != '' or '$(BITBUCKET_BUILD_NUMBER)' != '')">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+</Project>

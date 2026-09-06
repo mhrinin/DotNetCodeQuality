@@ -1,0 +1,35 @@
+<Project>
+
+  <PropertyGroup>
+    <DotNetCodeQualityProfile Condition="'$(DotNetCodeQualityProfile)' == '' and ('$(IsTestProject)' == 'true' or '$(TestProject)' == 'true' or '$(XunitTestProject)' == 'true')">Test</DotNetCodeQualityProfile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Include="$(DotNetCodeQualityConfigurationDirectory)Analysis.globalconfig" Visible="false" />
+    <EditorConfigFiles Include="$(DotNetCodeQualityConfigurationDirectory)Style.globalconfig" Condition="'$(DotNetCodeQualityStyle)' == 'true'" Visible="false" />
+    <EditorConfigFiles Include="$(DotNetCodeQualityConfigurationDirectory)Sonar.globalconfig" Condition="'$(DotNetCodeQualitySonar)' == 'true'" Visible="false" />
+    <AdditionalFiles Include="$(DotNetCodeQualitySonarLintXml)" Condition="'$(DotNetCodeQualitySonar)' == 'true'" Visible="false" />
+    <AdditionalFiles Include="$(DotNetCodeQualityConfigurationDirectory)BannedSymbols.txt" Condition="'$(DotNetCodeQualityBannedSymbols)' == 'true'" Visible="false" />
+  </ItemGroup>
+
+  <Target Name="DotNetCodeQualityResolveProfile" BeforeTargets="CoreCompile">
+    <PropertyGroup>
+      <_DotNetCodeQualityPackageReferences>;@(PackageReference->ToLower(), ';');</_DotNetCodeQualityPackageReferences>
+      <_DotNetCodeQualityHasTestPackage Condition="$(_DotNetCodeQualityPackageReferences.Contains(';xunit')) or $(_DotNetCodeQualityPackageReferences.Contains(';nunit;')) or $(_DotNetCodeQualityPackageReferences.Contains(';mstest')) or $(_DotNetCodeQualityPackageReferences.Contains(';microsoft.net.test.sdk;')) or $(_DotNetCodeQualityPackageReferences.Contains(';tunit;'))">true</_DotNetCodeQualityHasTestPackage>
+      <DotNetCodeQualityProfile Condition="'$(DotNetCodeQualityProfile)' == '' and '$(_DotNetCodeQualityHasTestPackage)' == 'true'">Test</DotNetCodeQualityProfile>
+      <DotNetCodeQualityProfile Condition="'$(DotNetCodeQualityProfile)' == '' and '$(OutputType)' == 'Library' and '$(UsingMicrosoftNETSdkWeb)' != 'true'">Library</DotNetCodeQualityProfile>
+      <DotNetCodeQualityProfile Condition="'$(DotNetCodeQualityProfile)' == ''">App</DotNetCodeQualityProfile>
+    </PropertyGroup>
+    <Error Text="DotNetCodeQualityProfile must be App, Library or Test; got '$(DotNetCodeQualityProfile)'." Condition="'$(DotNetCodeQualityProfile)' != 'App' and '$(DotNetCodeQualityProfile)' != 'Library' and '$(DotNetCodeQualityProfile)' != 'Test'" />
+    <ItemGroup>
+      <EditorConfigFiles Include="$(DotNetCodeQualityConfigurationDirectory)Profile.$(DotNetCodeQualityProfile).globalconfig" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="DotNetCodeQualityRemoveSonar" BeforeTargets="CoreCompile" Condition="'$(DotNetCodeQualitySonar)' != 'true'">
+    <ItemGroup>
+      <Analyzer Remove="@(Analyzer)" Condition="'%(Filename)' == 'SonarAnalyzer.CSharp'" />
+    </ItemGroup>
+  </Target>
+
+</Project>

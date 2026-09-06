@@ -1,0 +1,992 @@
+is_global = true
+
+# Enabled
+
+# Cognitive Complexity of methods should not be too high
+dotnet_diagnostic.S3776.severity = warning
+
+# Functions should not have too many lines of code
+dotnet_diagnostic.S138.severity = warning
+
+# Methods should not have too many parameters
+dotnet_diagnostic.S107.severity = warning
+
+# Unused private types or members should be removed
+dotnet_diagnostic.S1144.severity = warning
+
+# Unused local variables should be removed
+dotnet_diagnostic.S1481.severity = warning
+
+# Unused method parameters should be removed
+dotnet_diagnostic.S1172.severity = warning
+
+# Unread 'private' fields should be removed
+dotnet_diagnostic.S4487.severity = warning
+
+# Sonar defaults switched off
+
+# Types should be named in PascalCase
+dotnet_diagnostic.S101.severity = none
+
+# Nested blocks of code should not be left empty
+dotnet_diagnostic.S108.severity = none
+
+# General or reserved exceptions should never be thrown
+dotnet_diagnostic.S112.severity = none
+
+# Sections of code should not be commented out
+dotnet_diagnostic.S125.severity = none
+
+# 'for' loop stop conditions should be invariant
+dotnet_diagnostic.S127.severity = none
+
+# Literal suffixes should be upper case
+dotnet_diagnostic.S818.severity = none
+
+# 'goto' statement should not be used
+dotnet_diagnostic.S907.severity = none
+
+# Parameter names should match base declaration and other partial definitions
+dotnet_diagnostic.S927.severity = none
+
+# Method overrides should not change parameter defaults
+dotnet_diagnostic.S1006.severity = none
+
+# Finalizers should not throw exceptions
+dotnet_diagnostic.S1048.severity = none
+
+# Mergeable 'if' statements should be combined
+dotnet_diagnostic.S1066.severity = none
+
+# URIs should not be hardcoded
+dotnet_diagnostic.S1075.severity = none
+
+# Fields should not have public accessibility
+dotnet_diagnostic.S1104.severity = none
+
+# Redundant pairs of parentheses should be removed
+dotnet_diagnostic.S1110.severity = none
+
+# Empty statements should be removed
+dotnet_diagnostic.S1116.severity = none
+
+# Local variables should not shadow class fields or properties
+dotnet_diagnostic.S1117.severity = none
+
+# Utility classes should not have public constructors
+dotnet_diagnostic.S1118.severity = none
+
+# Assignments should not be made from within sub-expressions
+dotnet_diagnostic.S1121.severity = none
+
+# 'Obsolete' attributes should include explanations
+dotnet_diagnostic.S1123.severity = none
+
+# Boolean literals should not be redundant
+dotnet_diagnostic.S1125.severity = none
+
+# Deprecated code should be removed
+dotnet_diagnostic.S1133.severity = none
+
+# Track uses of 'FIXME' tags
+dotnet_diagnostic.S1134.severity = none
+
+# Track uses of 'TODO' tags
+dotnet_diagnostic.S1135.severity = none
+
+# 'Any()' should be used to test for emptiness
+dotnet_diagnostic.S1155.severity = none
+
+# Exceptions should not be thrown in finally blocks
+dotnet_diagnostic.S1163.severity = none
+
+# Empty arrays and collections should be returned instead of null
+dotnet_diagnostic.S1168.severity = none
+
+# Overriding members should do more than simply call the same member in the base class
+dotnet_diagnostic.S1185.severity = none
+
+# Methods should not be empty
+dotnet_diagnostic.S1186.severity = none
+
+# Nested code blocks should not be used
+dotnet_diagnostic.S1199.severity = none
+
+# 'Equals(Object)' and 'GetHashCode()' should be overridden in pairs
+dotnet_diagnostic.S1206.severity = none
+
+# 'Equals' and the comparison operators should be overridden when implementing 'IComparable'
+dotnet_diagnostic.S1210.severity = none
+
+# 'GC.Collect' should not be called
+dotnet_diagnostic.S1215.severity = none
+
+# Floating point numbers should not be tested for equality
+dotnet_diagnostic.S1244.severity = none
+
+# A 'while' loop should be used instead of a 'for' loop
+dotnet_diagnostic.S1264.severity = none
+
+# IP addresses should not be hardcoded
+dotnet_diagnostic.S1313.severity = none
+
+# Private fields only used as local variables in methods should become local variables
+dotnet_diagnostic.S1450.severity = none
+
+# Tests should not be ignored
+dotnet_diagnostic.S1607.severity = none
+
+# Strings should not be concatenated using '+' in a loop
+dotnet_diagnostic.S1643.severity = none
+
+# Variables should not be self-assigned
+dotnet_diagnostic.S1656.severity = none
+
+# An abstract class should have both abstract and concrete methods
+dotnet_diagnostic.S1694.severity = none
+
+# NullReferenceException should not be caught
+dotnet_diagnostic.S1696.severity = none
+
+# Constructors should only call non-overridable methods
+dotnet_diagnostic.S1699.severity = none
+
+# Loops with at most one iteration should be refactored
+dotnet_diagnostic.S1751.severity = none
+
+# Identical expressions should not be used on both sides of operators
+dotnet_diagnostic.S1764.severity = none
+
+# Objects should not be created to be dropped immediately without being used
+dotnet_diagnostic.S1848.severity = none
+
+# Unused assignments should be removed
+dotnet_diagnostic.S1854.severity = none
+
+# Related 'if/else if' statements should not have the same condition
+dotnet_diagnostic.S1862.severity = none
+
+# Two branches in a conditional structure should not have exactly the same implementation
+dotnet_diagnostic.S1871.severity = none
+
+# Redundant casts should not be used
+dotnet_diagnostic.S1905.severity = none
+
+# Inheritance list should not be redundant
+dotnet_diagnostic.S1939.severity = none
+
+# Boolean checks should not be inverted
+dotnet_diagnostic.S1940.severity = none
+
+# Invalid casts should be avoided
+dotnet_diagnostic.S1944.severity = none
+
+# 'for' loop increment clauses should modify the loops' counters
+dotnet_diagnostic.S1994.severity = none
+
+# Credentials should not be hard-coded
+dotnet_diagnostic.S2068.severity = none
+
+# SQL queries should not be dynamically formatted
+dotnet_diagnostic.S2077.severity = none
+
+# Cookies should have the 'secure' flag
+dotnet_diagnostic.S2092.severity = none
+
+# Classes should not be empty
+dotnet_diagnostic.S2094.severity = none
+
+# Collections should not be passed as arguments to their own methods
+dotnet_diagnostic.S2114.severity = none
+
+# A secure password should be used when connecting to a database
+dotnet_diagnostic.S2115.severity = none
+
+# Values should not be uselessly incremented
+dotnet_diagnostic.S2123.severity = none
+
+# Exceptions should be either logged or rethrown but not both
+dotnet_diagnostic.S2139.severity = none
+
+# Classes named like 'Exception' should extend 'Exception' or a subclass
+dotnet_diagnostic.S2166.severity = none
+
+# Short-circuit logic should be used in boolean contexts
+dotnet_diagnostic.S2178.severity = none
+
+# Integral numbers should not be shifted by zero or more than their number of bits-1
+dotnet_diagnostic.S2183.severity = none
+
+# Results of integer division should not be assigned to floating point variables
+dotnet_diagnostic.S2184.severity = none
+
+# Test classes should contain at least one test case
+dotnet_diagnostic.S2187.severity = none
+
+# Loops and recursions should not be infinite
+dotnet_diagnostic.S2190.severity = none
+
+# Unnecessary mathematical comparisons should not be made
+dotnet_diagnostic.S2198.severity = none
+
+# Methods without side effects should not have their return values ignored
+dotnet_diagnostic.S2201.severity = none
+
+# Runtime type checking should be simplified
+dotnet_diagnostic.S2219.severity = none
+
+# Non-constant static fields should not be visible
+dotnet_diagnostic.S2223.severity = none
+
+# 'ToString()' method should not return null
+dotnet_diagnostic.S2225.severity = none
+
+# Arguments should be passed in the same order as the method parameters
+dotnet_diagnostic.S2234.severity = none
+
+# Pseudorandom number generators (PRNGs) should not be used in security contexts
+dotnet_diagnostic.S2245.severity = none
+
+# A 'for' loop update clause should move the counter in the right direction
+dotnet_diagnostic.S2251.severity = none
+
+# For-loop conditions should be true at least once
+dotnet_diagnostic.S2252.severity = none
+
+# Custom cryptographic algorithms should not be used
+dotnet_diagnostic.S2257.severity = none
+
+# Composite format strings should not lead to unexpected behavior at runtime
+dotnet_diagnostic.S2275.severity = none
+
+# Field-like events should not be virtual
+dotnet_diagnostic.S2290.severity = none
+
+# Overflow checking should not be disabled for 'Enumerable.Sum'
+dotnet_diagnostic.S2291.severity = none
+
+# Trivial properties should be auto-implemented
+dotnet_diagnostic.S2292.severity = none
+
+# 'async' and 'await' should not be used as identifiers
+dotnet_diagnostic.S2306.severity = none
+
+# Methods and properties that don't access instance data should be static
+dotnet_diagnostic.S2325.severity = none
+
+# Unused type parameters should be removed
+dotnet_diagnostic.S2326.severity = none
+
+# 'GetHashCode' should not reference mutable fields
+dotnet_diagnostic.S2328.severity = none
+
+# Enumeration type names should not have 'Flags' or 'Enum' suffixes
+dotnet_diagnostic.S2344.severity = none
+
+# Flags enumerations should explicitly initialize all their members
+dotnet_diagnostic.S2345.severity = none
+
+# Flags enumerations zero-value members should be named 'None'
+dotnet_diagnostic.S2346.severity = none
+
+# Properties should not make collection or array copies
+dotnet_diagnostic.S2365.severity = none
+
+# Public methods should not have multidimensional array parameters
+dotnet_diagnostic.S2368.severity = none
+
+# Exceptions should not be thrown from property getters
+dotnet_diagnostic.S2372.severity = none
+
+# Write-only properties should not be used
+dotnet_diagnostic.S2376.severity = none
+
+# Mutable fields should not be 'public static'
+dotnet_diagnostic.S2386.severity = none
+
+# Unnecessary bit operations should not be performed
+dotnet_diagnostic.S2437.severity = none
+
+# Blocks should be synchronized on read-only fields
+dotnet_diagnostic.S2445.severity = none
+
+# Whitespace and control characters in string literals should be explicit
+dotnet_diagnostic.S2479.severity = none
+
+# Generic exceptions should not be ignored
+dotnet_diagnostic.S2486.severity = none
+
+# Shared resources should not be used for locking
+dotnet_diagnostic.S2551.severity = none
+
+# File permissions should not be set to world-accessible values
+dotnet_diagnostic.S2612.severity = none
+
+# Logging templates should be constant
+dotnet_diagnostic.S2629.severity = none
+
+# The length returned from a stream read should be checked
+dotnet_diagnostic.S2674.severity = none
+
+# Multiline blocks should be enclosed in curly braces
+dotnet_diagnostic.S2681.severity = none
+
+# 'NaN' should not be used in comparisons
+dotnet_diagnostic.S2688.severity = none
+
+# 'IndexOf' checks should not be for positive numbers
+dotnet_diagnostic.S2692.severity = none
+
+# Instance members should not write to 'static' fields
+dotnet_diagnostic.S2696.severity = none
+
+# Tests should include assertions
+dotnet_diagnostic.S2699.severity = none
+
+# Literal boolean values should not be used in assertions
+dotnet_diagnostic.S2701.severity = none
+
+# 'catch' clauses should do more than rethrow
+dotnet_diagnostic.S2737.severity = none
+
+# Static fields should not be used in generic types
+dotnet_diagnostic.S2743.severity = none
+
+# XML parsers should not be vulnerable to XXE attacks
+dotnet_diagnostic.S2755.severity = none
+
+# Non-existent operators like '=+' should not be used
+dotnet_diagnostic.S2757.severity = none
+
+# Doubled prefix operators '!!' and '~~' should not be used
+dotnet_diagnostic.S2761.severity = none
+
+# SQL keywords should be delimited by whitespace
+dotnet_diagnostic.S2857.severity = none
+
+# 'Thread.Sleep' should not be used in tests
+dotnet_diagnostic.S2925.severity = none
+
+# 'IDisposables' should be disposed
+dotnet_diagnostic.S2930.severity = none
+
+# Fields that are only assigned in the constructor should be 'readonly'
+dotnet_diagnostic.S2933.severity = none
+
+# Property assignments should not be made for 'readonly' fields not constrained to reference types
+dotnet_diagnostic.S2934.severity = none
+
+# Methods named 'Dispose' should implement 'IDisposable.Dispose'
+dotnet_diagnostic.S2953.severity = none
+
+# Generic parameters not constrained to reference types should not be compared to 'null'
+dotnet_diagnostic.S2955.severity = none
+
+# Assertions should be complete
+dotnet_diagnostic.S2970.severity = none
+
+# LINQ expressions should be simplified
+dotnet_diagnostic.S2971.severity = none
+
+# 'Object.ReferenceEquals' should not be used for value types
+dotnet_diagnostic.S2995.severity = none
+
+# 'ThreadStatic' fields should not be initialized
+dotnet_diagnostic.S2996.severity = none
+
+# 'IDisposables' created in a 'using' statement should not be returned
+dotnet_diagnostic.S2997.severity = none
+
+# 'ThreadStatic' should not be used on non-static fields
+dotnet_diagnostic.S3005.severity = none
+
+# Static fields should not be updated in constructors
+dotnet_diagnostic.S3010.severity = none
+
+# Reflection should not be used to increase accessibility of classes, methods, or fields
+dotnet_diagnostic.S3011.severity = none
+
+# 'is' should not be used with 'this'
+dotnet_diagnostic.S3060.severity = none
+
+# 'StringBuilder' data should be used
+dotnet_diagnostic.S3063.severity = none
+
+# 'async' methods should not return 'void'
+dotnet_diagnostic.S3168.severity = none
+
+# Multiple 'OrderBy' calls should not be used
+dotnet_diagnostic.S3169.severity = none
+
+# Delegates should not be subtracted
+dotnet_diagnostic.S3172.severity = none
+
+# 'Explicit' conversions of 'foreach' loops should not be used
+dotnet_diagnostic.S3217.severity = none
+
+# Inner class members should not shadow outer class 'static' or type members
+dotnet_diagnostic.S3218.severity = none
+
+# Method calls should not resolve ambiguously to overloads with 'params'
+dotnet_diagnostic.S3220.severity = none
+
+# Caller information arguments should not be provided explicitly
+dotnet_diagnostic.S3236.severity = none
+
+# 'value' contextual keyword should be used
+dotnet_diagnostic.S3237.severity = none
+
+# Methods should not return values that are never used
+dotnet_diagnostic.S3241.severity = none
+
+# Anonymous delegates should not be used to unsubscribe from Events
+dotnet_diagnostic.S3244.severity = none
+
+# Generic type parameters should be co/contravariant when possible
+dotnet_diagnostic.S3246.severity = none
+
+# Duplicate casts should not be made
+dotnet_diagnostic.S3247.severity = none
+
+# Classes directly extending 'object' should not call 'base' in 'GetHashCode' or 'Equals'
+dotnet_diagnostic.S3249.severity = none
+
+# Implementations should be provided for 'partial' methods
+dotnet_diagnostic.S3251.severity = none
+
+# Non-derived 'private' classes and records should be 'sealed'
+dotnet_diagnostic.S3260.severity = none
+
+# Namespaces should not be empty
+dotnet_diagnostic.S3261.severity = none
+
+# 'params' should be used on overrides
+dotnet_diagnostic.S3262.severity = none
+
+# Static fields should appear in the order they must be initialized
+dotnet_diagnostic.S3263.severity = none
+
+# Events should be invoked
+dotnet_diagnostic.S3264.severity = none
+
+# Non-flags enums should not be used in bitwise operations
+dotnet_diagnostic.S3265.severity = none
+
+# Loops should be simplified with 'LINQ' expressions
+dotnet_diagnostic.S3267.severity = none
+
+# Cookies should have the 'HttpOnly' flag
+dotnet_diagnostic.S3330.severity = none
+
+# Caller information parameters should come at the end of the parameter list
+dotnet_diagnostic.S3343.severity = none
+
+# Expressions used in 'Debug.Assert' should not produce side effects
+dotnet_diagnostic.S3346.severity = none
+
+# Ternary operators should not be nested
+dotnet_diagnostic.S3358.severity = none
+
+# Date and time should not be used as a type for primary keys
+dotnet_diagnostic.S3363.severity = none
+
+# Attribute, EventArgs, and Exception type names should end with the type being extended
+dotnet_diagnostic.S3376.severity = none
+
+# 'base.Equals' should not be used to check for reference equality in 'Equals' if 'base' is not 'object'
+dotnet_diagnostic.S3397.severity = none
+
+# 'private' methods called only by inner classes should be moved to those classes
+dotnet_diagnostic.S3398.severity = none
+
+# Methods should not return constants
+dotnet_diagnostic.S3400.severity = none
+
+# Assertion arguments should be passed in the correct order
+dotnet_diagnostic.S3415.severity = none
+
+# Method overloads with default parameter values should not overlap
+dotnet_diagnostic.S3427.severity = none
+
+# '[ExpectedException]' should not be used
+dotnet_diagnostic.S3431.severity = none
+
+# Test method signatures should be correct
+dotnet_diagnostic.S3433.severity = none
+
+# Variables should not be checked against the values they're about to be assigned
+dotnet_diagnostic.S3440.severity = none
+
+# 'abstract' classes should not have 'public' constructors
+dotnet_diagnostic.S3442.severity = none
+
+# Type should not be examined on 'System.Type' instances
+dotnet_diagnostic.S3443.severity = none
+
+# Interfaces should not simply inherit from base interfaces with colliding members
+dotnet_diagnostic.S3444.severity = none
+
+# Exceptions should not be explicitly rethrown
+dotnet_diagnostic.S3445.severity = none
+
+# '[Optional]' should not be used on 'ref' or 'out' parameters
+dotnet_diagnostic.S3447.severity = none
+
+# Right operands of shift operators should be integers
+dotnet_diagnostic.S3449.severity = none
+
+# Parameters with '[DefaultParameterValue]' attributes should also be marked '[Optional]'
+dotnet_diagnostic.S3450.severity = none
+
+# '[DefaultValue]' should not be used when '[DefaultParameterValue]' is meant
+dotnet_diagnostic.S3451.severity = none
+
+# Classes should not have only 'private' constructors
+dotnet_diagnostic.S3453.severity = none
+
+# 'string.ToCharArray()' and 'ReadOnlySpan<T>.ToArray()' should not be called redundantly
+dotnet_diagnostic.S3456.severity = none
+
+# Composite format strings should be used correctly
+dotnet_diagnostic.S3457.severity = none
+
+# Empty 'case' clauses that fall through to the 'default' should be omitted
+dotnet_diagnostic.S3458.severity = none
+
+# Unassigned members should be removed
+dotnet_diagnostic.S3459.severity = none
+
+# Type inheritance should not be recursive
+dotnet_diagnostic.S3464.severity = none
+
+# Optional parameters should be passed to 'base' calls
+dotnet_diagnostic.S3466.severity = none
+
+# 'ServiceContract' and 'OperationContract' attributes should be used together
+dotnet_diagnostic.S3597.severity = none
+
+# One-way 'OperationContract' methods should have 'void' return type
+dotnet_diagnostic.S3598.severity = none
+
+# 'params' should not be introduced on overrides
+dotnet_diagnostic.S3600.severity = none
+
+# Methods with 'Pure' attribute should return a value
+dotnet_diagnostic.S3603.severity = none
+
+# Member initializer values should not be redundant
+dotnet_diagnostic.S3604.severity = none
+
+# Nullable type comparison should not be redundant
+dotnet_diagnostic.S3610.severity = none
+
+# Jump statements should not be redundant
+dotnet_diagnostic.S3626.severity = none
+
+# 'SafeHandle.DangerousGetHandle' should not be called
+dotnet_diagnostic.S3869.severity = none
+
+# Exception types should be 'public'
+dotnet_diagnostic.S3871.severity = none
+
+# 'operator==' should not be overloaded on reference types
+dotnet_diagnostic.S3875.severity = none
+
+# Exceptions should not be thrown from unexpected methods
+dotnet_diagnostic.S3877.severity = none
+
+# Arrays should not be created for params parameters
+dotnet_diagnostic.S3878.severity = none
+
+# 'IDisposable' should be implemented correctly
+dotnet_diagnostic.S3881.severity = none
+
+# 'Assembly.Load' should be used
+dotnet_diagnostic.S3885.severity = none
+
+# Mutable, non-private fields should not be 'readonly'
+dotnet_diagnostic.S3887.severity = none
+
+# 'Thread.Resume' and 'Thread.Suspend' should not be used
+dotnet_diagnostic.S3889.severity = none
+
+# Classes that provide 'Equals(<T>)' should implement 'IEquatable<T>'
+dotnet_diagnostic.S3897.severity = none
+
+# Types should be defined in named namespaces
+dotnet_diagnostic.S3903.severity = none
+
+# Assemblies should have version information
+dotnet_diagnostic.S3904.severity = none
+
+# All branches in a conditional structure should not have exactly the same implementation
+dotnet_diagnostic.S3923.severity = none
+
+# 'ISerializable' should be implemented correctly
+dotnet_diagnostic.S3925.severity = none
+
+# Deserialization methods should be provided for 'OptionalField' members
+dotnet_diagnostic.S3926.severity = none
+
+# Serialization event handlers should be implemented correctly
+dotnet_diagnostic.S3927.severity = none
+
+# Parameter names used into ArgumentException constructors should match an existing one
+dotnet_diagnostic.S3928.severity = none
+
+# 'static' fields should be initialized inline
+dotnet_diagnostic.S3963.severity = none
+
+# 'GC.SuppressFinalize' should not be called
+dotnet_diagnostic.S3971.severity = none
+
+# Conditionals should start on new lines
+dotnet_diagnostic.S3972.severity = none
+
+# A conditionally executed single line should be denoted by indentation
+dotnet_diagnostic.S3973.severity = none
+
+# Collection sizes and array length comparisons should make sense
+dotnet_diagnostic.S3981.severity = none
+
+# Exceptions should not be created without being thrown
+dotnet_diagnostic.S3984.severity = none
+
+# Custom attributes should be marked with 'System.AttributeUsageAttribute'
+dotnet_diagnostic.S3993.severity = none
+
+# Threads should not lock on objects with weak identity
+dotnet_diagnostic.S3998.severity = none
+
+# Inherited member visibility should not be decreased
+dotnet_diagnostic.S4015.severity = none
+
+# Base class methods should not be hidden
+dotnet_diagnostic.S4019.severity = none
+
+# Classes implementing 'IEquatable<T>' should be sealed
+dotnet_diagnostic.S4035.severity = none
+
+# OS commands should not rely on PATH resolution
+dotnet_diagnostic.S4036.severity = none
+
+# Operators should be overloaded consistently
+dotnet_diagnostic.S4050.severity = none
+
+# Types should not extend outdated base types
+dotnet_diagnostic.S4052.severity = none
+
+# 'params' should be used instead of 'varargs'
+dotnet_diagnostic.S4061.severity = none
+
+# Non-flags enums should not be marked with 'FlagsAttribute'
+dotnet_diagnostic.S4070.severity = none
+
+# Method overloads should be grouped together
+dotnet_diagnostic.S4136.severity = none
+
+# Collection elements should not be replaced unconditionally
+dotnet_diagnostic.S4143.severity = none
+
+# Methods should not have identical implementations
+dotnet_diagnostic.S4144.severity = none
+
+# Classes should implement their 'ExportAttribute' interfaces
+dotnet_diagnostic.S4159.severity = none
+
+# Native methods should be wrapped
+dotnet_diagnostic.S4200.severity = none
+
+# Null checks should not be combined with 'is' operator checks
+dotnet_diagnostic.S4201.severity = none
+
+# Windows Forms entry points should be marked with STAThread
+dotnet_diagnostic.S4210.severity = none
+
+# Members should not have conflicting transparency annotations
+dotnet_diagnostic.S4211.severity = none
+
+# Events should have proper arguments
+dotnet_diagnostic.S4220.severity = none
+
+# 'ConstructorArgument' parameters should exist in constructors
+dotnet_diagnostic.S4260.severity = none
+
+# Getters and setters should access the expected fields
+dotnet_diagnostic.S4275.severity = none
+
+# 'Shared' parts should not be created with 'new'
+dotnet_diagnostic.S4277.severity = none
+
+# Weak SSL/TLS protocols should not be used
+dotnet_diagnostic.S4423.severity = none
+
+# Cryptographic keys should be robust
+dotnet_diagnostic.S4426.severity = none
+
+# 'PartCreationPolicyAttribute' should be used with 'ExportAttribute'
+dotnet_diagnostic.S4428.severity = none
+
+# LDAP connections should be authenticated
+dotnet_diagnostic.S4433.severity = none
+
+# Parameter validation in yielding methods should be wrapped
+dotnet_diagnostic.S4456.severity = none
+
+# CSRF protections should not be disabled
+dotnet_diagnostic.S4502.severity = none
+
+# Debugging features should not be enabled in production
+dotnet_diagnostic.S4507.severity = none
+
+# 'default' clauses should be first or last
+dotnet_diagnostic.S4524.severity = none
+
+# 'DebuggerDisplayAttribute' strings should reference existing members
+dotnet_diagnostic.S4545.severity = none
+
+# 'new Guid()' should not be used
+dotnet_diagnostic.S4581.severity = none
+
+# Calls to delegate's method 'BeginInvoke' should be paired with calls to 'EndInvoke'
+dotnet_diagnostic.S4583.severity = none
+
+# Non-async 'Task/Task<T>' methods should not return null
+dotnet_diagnostic.S4586.severity = none
+
+# Start index should be used instead of calling Substring
+dotnet_diagnostic.S4635.severity = none
+
+# Comments should not be empty
+dotnet_diagnostic.S4663.severity = none
+
+# Weak hashing algorithms should not be used
+dotnet_diagnostic.S4790.severity = none
+
+# Server certificates should be verified during SSL/TLS connections
+dotnet_diagnostic.S4830.severity = none
+
+# 'ValueTask' should be consumed correctly
+dotnet_diagnostic.S5034.severity = none
+
+# Cross-Origin Resource Sharing (CORS) policy should be restricted to trusted origins
+dotnet_diagnostic.S5122.severity = none
+
+# Clear-text protocols should not be used
+dotnet_diagnostic.S5332.severity = none
+
+# Passwords should not be stored in plaintext or with a fast hashing algorithm
+dotnet_diagnostic.S5344.severity = none
+
+# Temporary files should not be created in publicly writable directories
+dotnet_diagnostic.S5443.severity = none
+
+# Insecure temporary file creation methods should not be used
+dotnet_diagnostic.S5445.severity = none
+
+# Encryption algorithms should be used with secure mode and padding scheme
+dotnet_diagnostic.S5542.severity = none
+
+# Cipher algorithms should be robust
+dotnet_diagnostic.S5547.severity = none
+
+# JWT should be signed and verified with strong cipher algorithms
+dotnet_diagnostic.S5659.severity = none
+
+# HTTP request content length should be limited
+dotnet_diagnostic.S5693.severity = none
+
+# ASP.NET Request Validation should not be disabled
+dotnet_diagnostic.S5753.severity = none
+
+# Serializable objects should validate data during deserialization
+dotnet_diagnostic.S5766.severity = none
+
+# Regular expressions should be syntactically valid
+dotnet_diagnostic.S5856.severity = none
+
+# XML signatures should be validated securely
+dotnet_diagnostic.S6377.severity = none
+
+# Secrets should not be hard-coded
+dotnet_diagnostic.S6418.severity = none
+
+# Azure Functions should be stateless
+dotnet_diagnostic.S6419.severity = none
+
+# Client instances should not be recreated on each Azure Function invocation
+dotnet_diagnostic.S6420.severity = none
+
+# Calls to 'async' methods should not be blocking in Azure Functions
+dotnet_diagnostic.S6422.severity = none
+
+# Interfaces for durable entities should satisfy the restrictions
+dotnet_diagnostic.S6424.severity = none
+
+# Regular expressions should be executed with a timeout
+dotnet_diagnostic.S6444.severity = none
+
+# Avoid using 'DateTime.Now' for benchmarking or timing operations
+dotnet_diagnostic.S6561.severity = none
+
+# Always set the 'DateTimeKind' when creating new 'DateTime' instances
+dotnet_diagnostic.S6562.severity = none
+
+# Use 'TimeZoneInfo.FindSystemTimeZoneById' without converting the timezones with 'TimezoneConverter'
+dotnet_diagnostic.S6575.severity = none
+
+# Use a format provider when parsing date and time
+dotnet_diagnostic.S6580.severity = none
+
+# Use the 'UnixEpoch' field instead of creating 'DateTime' instances that point to the beginning of the Unix epoch
+dotnet_diagnostic.S6588.severity = none
+
+# The collection should be filtered before sorting by using 'Where' before 'OrderBy'
+dotnet_diagnostic.S6607.severity = none
+
+# Prefer indexing instead of 'Enumerable' methods on types implementing 'IList'
+dotnet_diagnostic.S6608.severity = none
+
+# 'Min/Max' properties of 'Set' types should be used instead of the 'Enumerable' extension methods
+dotnet_diagnostic.S6609.severity = none
+
+# 'StartsWith' and 'EndsWith' overloads that take a 'char' should be used instead of the ones that take a 'string'
+dotnet_diagnostic.S6610.severity = none
+
+# The lambda parameter should be used instead of capturing arguments in 'ConcurrentDictionary' methods
+dotnet_diagnostic.S6612.severity = none
+
+# 'First' and 'Last' properties of 'LinkedList' should be used instead of the 'First()' and 'Last()' extension methods
+dotnet_diagnostic.S6613.severity = none
+
+# 'Contains' should be used instead of 'Any' for simple equality checks
+dotnet_diagnostic.S6617.severity = none
+
+# 'string.Create' should be used instead of 'FormattableString'
+dotnet_diagnostic.S6618.severity = none
+
+# Unsafe code blocks should not be used
+dotnet_diagnostic.S6640.severity = none
+
+# Logging in a catch clause should pass the caught exception as a parameter.
+dotnet_diagnostic.S6667.severity = none
+
+# Logging arguments should be passed to the correct parameter
+dotnet_diagnostic.S6668.severity = none
+
+# 'Trace.Write' and 'Trace.WriteLine' should not be used
+dotnet_diagnostic.S6670.severity = none
+
+# Generic logger injection should match enclosing type
+dotnet_diagnostic.S6672.severity = none
+
+# Log message template placeholders should be in the right order
+dotnet_diagnostic.S6673.severity = none
+
+# Log message template should be syntactically correct
+dotnet_diagnostic.S6674.severity = none
+
+# 'Trace.WriteLineIf' should not be used with 'TraceSwitch' levels
+dotnet_diagnostic.S6675.severity = none
+
+# Message template placeholders should be unique
+dotnet_diagnostic.S6677.severity = none
+
+# Use PascalCase for named placeholders
+dotnet_diagnostic.S6678.severity = none
+
+# Blazor query parameter type should be supported
+dotnet_diagnostic.S6797.severity = none
+
+# [JSInvokable] attribute should only be used on public methods
+dotnet_diagnostic.S6798.severity = none
+
+# Component parameter type should match the route parameter type constraint
+dotnet_diagnostic.S6800.severity = none
+
+# Backslash should be avoided in route templates
+dotnet_diagnostic.S6930.severity = none
+
+# ASP.NET controller actions should not have a route template starting with '/'
+dotnet_diagnostic.S6931.severity = none
+
+# Use model binding instead of reading raw request data
+dotnet_diagnostic.S6932.severity = none
+
+# A Route attribute should be added to the controller when a route template is specified at the action level
+dotnet_diagnostic.S6934.severity = none
+
+# Controllers should not have mixed responsibilities
+dotnet_diagnostic.S6960.severity = none
+
+# API Controllers should derive from ControllerBase instead of Controller
+dotnet_diagnostic.S6961.severity = none
+
+# You should pool HTTP connections with HttpClientFactory
+dotnet_diagnostic.S6962.severity = none
+
+# Value type property used as input in a controller action should be nullable, required or annotated with the JsonRequiredAttribute to avoid under-posting.
+dotnet_diagnostic.S6964.severity = none
+
+# REST API actions should be annotated with an HTTP verb attribute
+dotnet_diagnostic.S6965.severity = none
+
+# Awaitable method should be used
+dotnet_diagnostic.S6966.severity = none
+
+# ModelState.IsValid should be called in controller actions
+dotnet_diagnostic.S6967.severity = none
+
+# Actions that return a value should be annotated with ProducesResponseTypeAttribute containing the return type
+dotnet_diagnostic.S6968.severity = none
+
+# Content Security Policies should be restrictive
+dotnet_diagnostic.S7039.severity = none
+
+# Identifiers should not conflict with the C# 14 'field' contextual keyword
+dotnet_diagnostic.S8367.severity = none
+
+# Identifiers should not conflict with the C# 14 'extension' contextual keyword
+dotnet_diagnostic.S8368.severity = none
+
+# Return types named 'partial' should be escaped with '@'
+dotnet_diagnostic.S8380.severity = none
+
+# 'scoped' should be escaped when used as an identifier or type name in parenthesized lambda parameter lists
+dotnet_diagnostic.S8381.severity = none
+
+# The overload accepting a 'CancellationToken' should be used
+dotnet_diagnostic.S8949.severity = none
+
+# Null-forgiving operators should not be redundant
+dotnet_diagnostic.S8969.severity = none
+
+# Null-forgiving operators should not be used when nullable warnings are disabled
+dotnet_diagnostic.S8970.severity = none
+
+# Copy-paste token calculator
+dotnet_diagnostic.S9999-cpd.severity = none
+
+# Log generator
+dotnet_diagnostic.S9999-log.severity = none
+
+# File metadata generator
+dotnet_diagnostic.S9999-metadata.severity = none
+
+# Metrics calculator
+dotnet_diagnostic.S9999-metrics.severity = none
+
+# Symbol reference calculator
+dotnet_diagnostic.S9999-symbolRef.severity = none
+
+# Telemetry generator
+dotnet_diagnostic.S9999-telemetry.severity = none
+
+# Test method declarations generator
+dotnet_diagnostic.S9999-testMethodDeclaration.severity = none
+
+# Token type calculator
+dotnet_diagnostic.S9999-token-type.severity = none
+
+# Analysis Warning generator
+dotnet_diagnostic.S9999-warning.severity = none

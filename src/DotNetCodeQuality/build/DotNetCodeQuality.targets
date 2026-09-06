@@ -30,7 +30,6 @@
       <_DotNetCodeQualityPackageReferences>;@(PackageReference->ToLower(), ';');</_DotNetCodeQualityPackageReferences>
       <_DotNetCodeQualityHasTestPackage Condition="$(_DotNetCodeQualityPackageReferences.Contains(';xunit')) or $(_DotNetCodeQualityPackageReferences.Contains(';nunit;')) or $(_DotNetCodeQualityPackageReferences.Contains(';mstest')) or $(_DotNetCodeQualityPackageReferences.Contains(';microsoft.net.test.sdk;')) or $(_DotNetCodeQualityPackageReferences.Contains(';tunit;'))">true</_DotNetCodeQualityHasTestPackage>
       <DotNetCodeQualityProfile Condition="'$(DotNetCodeQualityProfile)' == '' and '$(_DotNetCodeQualityHasTestPackage)' == 'true'">Test</DotNetCodeQualityProfile>
-      <DotNetCodeQualityProfile Condition="'$(DotNetCodeQualityProfile)' == '' and '$(OutputType)' == 'Library' and '$(UsingMicrosoftNETSdkWeb)' != 'true'">Library</DotNetCodeQualityProfile>
       <DotNetCodeQualityProfile Condition="'$(DotNetCodeQualityProfile)' == ''">App</DotNetCodeQualityProfile>
     </PropertyGroup>
     <Error Text="DotNetCodeQualityProfile must be App, Library or Test; got '$(DotNetCodeQualityProfile)'." Condition="'$(DotNetCodeQualityProfile)' != 'App' and '$(DotNetCodeQualityProfile)' != 'Library' and '$(DotNetCodeQualityProfile)' != 'Test'" />

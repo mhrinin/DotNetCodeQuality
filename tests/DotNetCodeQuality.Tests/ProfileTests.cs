@@ -73,11 +73,24 @@ public sealed class ProfileTests(PackageFixture fixture)
     }
 
     [Fact]
-    public async Task Library_RequiresConfigureAwait()
+    public async Task DeclaredLibraryProfile_RequiresConfigureAwait()
+    {
+        var result = await new ProjectBuilder(fixture)
+            .AsLibrary()
+            .WithProperty("DotNetCodeQualityProfile", "Library")
+            .WithSource("Work.cs", AwaitWithoutConfigureAwait)
+            .BuildAsync();
+
+        Assert.True(result.HasError("CA2007"), result.Output);
+    }
+
+    [Fact]
+    public async Task ClassLibrary_DefaultsToAppProfile()
     {
         var result = await new ProjectBuilder(fixture).AsLibrary().WithSource("Work.cs", AwaitWithoutConfigureAwait).BuildAsync();
 
-        Assert.True(result.HasError("CA2007"), result.Output);
+        Assert.True(result.ExitCode == 0, result.Output);
+        Assert.False(result.Has("CA2007"), result.Output);
     }
 
     [Fact]

@@ -31,7 +31,7 @@ Build. Fix what fails. That is the whole adoption procedure. For a large existin
 | Analysis tuning | rules that fight real codebases are off: identifiers matching keywords or type names (CA1716, CA1720), `GC.SuppressFinalize` (CA1816), LoggerMessage delegates (CA1848, CA1873) |
 | Sonar | SonarAnalyzer.CSharp with 7 rules on (cognitive complexity, method length, parameter count, unused private members / locals / parameters / fields) and every other default rule off; thresholds: 100 lines per method, 10 parameters |
 | Banned APIs | `DateTime.Now`, `DateTimeOffset.Now`, `Task.Result`, `Task.Wait()`, `Thread.Sleep` |
-| Profiles | `App` (default), `Library` (adds `ConfigureAwait(false)`), `Test` (relaxes naming, constant arrays, parameter count); detected automatically |
+| Profiles | `App` (default), `Test` (relaxes naming, constant arrays, parameter count; detected automatically), `Library` (adds `ConfigureAwait(false)`; opt in per project) |
 
 ## Properties
 
@@ -40,7 +40,7 @@ Set any of these in a `.csproj` or `Directory.Build.props`.
 | Property | Default | Meaning |
 | --- | --- | --- |
 | `DotNetCodeQualityStrict` | `true` | warnings as errors, audit findings as errors |
-| `DotNetCodeQualityProfile` | detected | `App`, `Library` or `Test`; an explicit value wins over detection |
+| `DotNetCodeQualityProfile` | `App`, or `Test` when detected | `App`, `Library` or `Test`; an explicit value wins over detection |
 | `DotNetCodeQualitySonar` | `true` | `false` removes the Sonar analyzer entirely |
 | `DotNetCodeQualitySonarLintXml` | package file | path to your own `SonarLint.xml` with rule thresholds |
 | `DotNetCodeQualityBannedSymbols` | `true` | include the starter `BannedSymbols.txt`; your own `BannedSymbols.txt` files are additive |
@@ -50,7 +50,11 @@ Every standard MSBuild property the package sets uses a `Condition="'$(X)' == ''
 
 NuGet audit findings (NU1901-NU1904) fail the build through their replay at build time. The audit mode and level the package sets take effect from the second restore onwards, because a package's settings are not yet imported during the restore that first brings it in.
 
-Profile detection: `Test` when the project references Microsoft.NET.Test.Sdk, xunit, NUnit or MSTest; `Library` for a class library outside the Web SDK; `App` otherwise.
+Profile detection: `Test` when the project references Microsoft.NET.Test.Sdk, xunit, NUnit or MSTest; `App` otherwise. `Library` is never inferred, because most class libraries in an application repository are internal plumbing. Declare it on libraries that are genuinely reused elsewhere:
+
+```xml
+<DotNetCodeQualityProfile>Library</DotNetCodeQualityProfile>
+```
 
 ## What stays in your repository
 

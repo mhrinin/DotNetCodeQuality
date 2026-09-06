@@ -194,7 +194,9 @@ Out of scope for this phase: museum adoption.
 
 - [x] `.github/workflows/ci.yml`: on push and PR; `actions/setup-dotnet` with `6.0.x`, `8.0.x`, `9.0.x`, `10.0.x`; `dotnet pack` → `NuGetDirectory`; `dotnet test`; generator `--check`; upload nupkg artifact
 - [x] `.github/workflows/release.yml`: on tag `v*`; `dotnet pack` (MinVer derives the version from the tag); `dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate`
-- [ ] User action: create a nuget.org API key scoped to `DotNetCodeQuality` push and store it as repo secret `NUGET_API_KEY`
+- [x] `release.yml` uses nuget.org Trusted Publishing (GitHub OIDC via `NuGet/login@v1`, job permission `id-token: write`) instead of a stored API key; the nuget.org profile name comes from the repository variable `NUGET_USER`
+- [ ] User action: on nuget.org, username menu > Trusted Publishing > add a policy: owner `mhrinin`, repository `DotNetCodeQuality`, workflow file `release.yml`, no environment, scope allowing new package publishing for `DotNetCodeQuality`. A policy for a brand-new package is provisionally active for 7 days until the first publish locks it to the repository id
+- [ ] User action: in the GitHub repo, Settings > Secrets and variables > Actions > Variables, add `NUGET_USER` = your nuget.org profile name (not the email)
 - [ ] Tag `v1.0.0`, push, confirm the package page on nuget.org shows README, MIT, two dependencies
 
 ### Acceptance criteria
@@ -238,7 +240,7 @@ Dry run on 2026-09-06 against the locally packed 999.9.9 with `DotNetCodeQuality
 _(write when phase completes)_
 
 ## New dependencies or infrastructure
-- nuget.org account for `mhrinin` and an API key stored as GitHub secret `NUGET_API_KEY` (user action).
+- nuget.org account with a Trusted Publishing policy for `mhrinin/DotNetCodeQuality` + `release.yml`, and the GitHub repository variable `NUGET_USER` (user actions). No long-lived secret.
 - Package dependencies: SonarAnalyzer.CSharp 10.33.0.1635, Microsoft.CodeAnalysis.BannedApiAnalyzers 5.6.0. Build-time only: MinVer 8.0.0.
 - Museum repo: SecurityCodeScan.VS2019 is dropped on adoption; Microsoft's built-in CA security rules remain.
 

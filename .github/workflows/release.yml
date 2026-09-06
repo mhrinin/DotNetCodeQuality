@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            6.0.x
+            8.0.x
+            9.0.x
+            10.0.x
+
+      - name: Pack
+        run: dotnet pack src/DotNetCodeQuality -c Release -o artifacts
+
+      - name: Test
+        run: dotnet test tests/DotNetCodeQuality.Tests -c Release
+        env:
+          NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
+      - name: Push to nuget.org
+        run: dotnet nuget push "artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate

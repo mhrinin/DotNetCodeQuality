@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            6.0.x
+            8.0.x
+            9.0.x
+            10.0.x
+
+      - name: Pack
+        run: dotnet pack src/DotNetCodeQuality -c Release -o artifacts
+
+      - name: Check the Sonar rule list against the referenced analyzer version
+        run: dotnet run --project tools/SonarConfigGenerator -- --check
+
+      - name: Test
+        run: dotnet test tests/DotNetCodeQuality.Tests -c Release
+        env:
+          NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nupkg
+          path: artifacts/*.nupkg
+          if-no-files-found: error

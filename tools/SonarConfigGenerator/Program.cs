@@ -42,7 +42,7 @@ if (check)
 }
 
 File.WriteAllText(configPath, generated, new UTF8Encoding(false));
-Console.WriteLine($"Wrote {configPath}: {enabled.Count} enabled, {rules.Count(r => r.Value.Enabled) - enabled.Count} switched off (SonarAnalyzer.CSharp {version}).");
+Console.WriteLine($"Wrote {configPath}: {enabled.Count} enabled, {rules.Count(r => r.Value.Enabled && !enabled.Contains(r.Key))} switched off (SonarAnalyzer.CSharp {version}).");
 return 0;
 
 static string FindRepositoryRoot()

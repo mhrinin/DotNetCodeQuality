@@ -5,7 +5,5 @@ M:System.Threading.Tasks.Task.Wait();Await the task instead of blocking on Wait(
 M:System.Threading.Tasks.Task.Wait(System.Int32);Await the task instead of blocking on Wait()
 M:System.Threading.Tasks.Task.Wait(System.TimeSpan);Await the task instead of blocking on Wait()
 M:System.Threading.Tasks.Task.Wait(System.Threading.CancellationToken);Await the task instead of blocking on Wait()
-M:System.Runtime.CompilerServices.TaskAwaiter.GetResult();Await the task instead of GetAwaiter().GetResult()
-M:System.Runtime.CompilerServices.TaskAwaiter`1.GetResult();Await the task instead of GetAwaiter().GetResult()
 M:System.Threading.Thread.Sleep(System.Int32);Use await Task.Delay
 M:System.Threading.Thread.Sleep(System.TimeSpan);Use await Task.Delay

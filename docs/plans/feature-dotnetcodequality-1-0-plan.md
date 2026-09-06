@@ -147,13 +147,13 @@ Out of scope for this phase: generating configs for any other analyzer.
 `tools/SonarConfigGenerator` (net10.0 console, references Microsoft.CodeAnalysis.CSharp + Workspaces.Common 5.0.0) reads the Sonar version from the package csproj, finds the DLL in the NuGet cache (NUGET_PACKAGES, `dotnet nuget locals`, or ~/.nuget/packages), enumerates analyzers tolerating ReflectionTypeLoadException, keeps the `# Enabled` list from the committed file and regenerates the off-list with titles. Verified: `--check` exits 0 on the committed file; deleting one rule makes `--check` exit 1 naming S6562 as new; plain run reproduces the committed file with no git diff. CI wiring is a Phase 5 checkbox.
 
 ## Phase 4: Package test harness
-Status: Not started
+Status: Complete
 Out of scope for this phase: CI wiring (Phase 5).
 
-- [ ] `tests/DotNetCodeQuality.Tests` (xunit.v3, Microsoft.NET.Test.Sdk, `IsTestProject=true` explicitly, `DotNetCodeQualityProfile` irrelevant because the test project does not reference the package)
-- [ ] `PackageFixture`: packs `src/DotNetCodeQuality` once per run into a temp folder with version `999.9.9` (or reuses `$(NuGetDirectory)` on CI)
-- [ ] `ProjectBuilder`: writes a throwaway project into a temp dir with `NuGet.config` (packageSourceMapping: `*` → nuget.org, `DotNetCodeQuality` → temp folder; isolated `globalPackagesFolder`), optional `global.json` for an SDK version, `<ErrorLog>build.sarif,version=2.1</ErrorLog>`, arbitrary properties, extra package references, source files, optional `.editorconfig` and `BannedSymbols.txt`; runs `dotnet build`, parses SARIF into rule id → level
-- [ ] Tests (one per line):
+- [x] `tests/DotNetCodeQuality.Tests` (xunit.v3, Microsoft.NET.Test.Sdk, `IsTestProject=true` explicitly, `DotNetCodeQualityProfile` irrelevant because the test project does not reference the package)
+- [x] `PackageFixture`: packs `src/DotNetCodeQuality` once per run into a temp folder with version `999.9.9` (or reuses `$(NuGetDirectory)` on CI)
+- [x] `ProjectBuilder`: writes a throwaway project into a temp dir with `NuGet.config` (packageSourceMapping: `*` → nuget.org, `DotNetCodeQuality` → temp folder; isolated `globalPackagesFolder`), optional `global.json` for an SDK version, `<ErrorLog>build.sarif,version=2.1</ErrorLog>`, arbitrary properties, extra package references, source files, optional `.editorconfig` and `BannedSymbols.txt`; runs `dotnet build`, parses SARIF into rule id → level
+- [x] Tests (one per line):
   - strict by default: unused local → error S1481; brace-less if → error IDE0011; block namespace → error IDE0161; `DateTime.Now` → error RS0030
   - `DotNetCodeQualityStrict=false` → same ids as warnings, exit 0
   - `new DateTime(2020,1,1)` → no S6562 (Sonar defaults are off)
@@ -180,7 +180,13 @@ Out of scope for this phase: CI wiring (Phase 5).
 - `dotnet test tests/DotNetCodeQuality.Tests -nologo` → `Passed!`, 0 failed.
 
 ### Phase Summary
-_(write when phase completes)_
+`tests/DotNetCodeQuality.Tests` (xunit.v3 3.2.2, Microsoft.NET.Test.Sdk 18.0.1): `PackageFixture` packs 999.9.9 into a per-run temp feed (or copies `DOTNETCODEQUALITY_NUPKG`), `ProjectBuilder` writes throwaway projects with NuGet.config source mapping and an isolated packages folder, `DotnetCli` runs `dotnet` with build-host env vars scrubbed and `NUGET_PACKAGES` pointed at the isolated folder (a machine-wide `NUGET_PACKAGES` otherwise overrides NuGet.config), diagnostics parsed from console output. 28 tests; 27 pass locally, the 8.0 matrix case skips because only 8.0.100-rc.1 is installed here.
+
+Package changes forced by the tests:
+- Strict block and the `DotNetCodeQuality*` defaults moved from .props to .targets so a value in the consumer's csproj body is seen. The SDK itself defaults `TreatWarningsAsErrors` to `false` before package targets load, so strict mode sets `TreatWarningsAsErrors` and `CodeAnalysisTreatWarningsAsErrors` outright instead of guarding on empty.
+- NU1901-NU1904 are added to `MSBuildWarningsAsErrors` as well as `WarningsAsErrors`; audit findings are restore warnings replayed by ResolvePackageAssets at build time, and only MSBuild-level warnings-as-errors promotes the replay.
+- Microsoft.CodeAnalysis.BannedApiAnalyzers pinned to 3.3.4: 5.6.0 fails to load on the .NET 6 SDK compiler (CS8032), which strict mode turned into a build break.
+- The `GetAwaiter().GetResult()` bans are dropped: xunit.v3's generated entry point uses that idiom, so every xunit.v3 consumer would have failed.
 
 ## Phase 5: CI and first release
 Status: Not started

@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <PackageReference Include="SonarAnalyzer.CSharp" Version="10.33.0.1635" PrivateAssets="none" />
-    <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="5.6.0" PrivateAssets="none" />
+    <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="3.3.4" PrivateAssets="none" />
     <PackageReference Include="MinVer" Version="8.0.0" PrivateAssets="all" />
   </ItemGroup>
 

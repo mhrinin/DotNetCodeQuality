@@ -1,7 +1,20 @@
 <Project>
 
   <PropertyGroup>
+    <DotNetCodeQualityStrict Condition="'$(DotNetCodeQualityStrict)' == ''">true</DotNetCodeQualityStrict>
+    <DotNetCodeQualitySonar Condition="'$(DotNetCodeQualitySonar)' == ''">true</DotNetCodeQualitySonar>
+    <DotNetCodeQualityBannedSymbols Condition="'$(DotNetCodeQualityBannedSymbols)' == ''">true</DotNetCodeQualityBannedSymbols>
+    <DotNetCodeQualityStyle Condition="'$(DotNetCodeQualityStyle)' == ''">true</DotNetCodeQualityStyle>
+    <DotNetCodeQualitySonarLintXml Condition="'$(DotNetCodeQualitySonarLintXml)' == ''">$(DotNetCodeQualityConfigurationDirectory)SonarLint.xml</DotNetCodeQualitySonarLintXml>
     <DotNetCodeQualityProfile Condition="'$(DotNetCodeQualityProfile)' == '' and ('$(IsTestProject)' == 'true' or '$(TestProject)' == 'true' or '$(XunitTestProject)' == 'true')">Test</DotNetCodeQualityProfile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(DotNetCodeQualityStrict)' == 'true'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+    <WarningsAsErrors>$(WarningsAsErrors);NU1901;NU1902;NU1903;NU1904</WarningsAsErrors>
+    <MSBuildWarningsAsErrors>$(MSBuildWarningsAsErrors);NU1901;NU1902;NU1903;NU1904</MSBuildWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>

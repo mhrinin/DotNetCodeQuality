@@ -23,13 +23,88 @@ dotnet_diagnostic.S1172.severity = warning
 # Unread 'private' fields should be removed
 dotnet_diagnostic.S4487.severity = warning
 
+# Loops with at most one iteration should be refactored
+dotnet_diagnostic.S1751.severity = warning
+
+# Results of integer division should not be assigned to floating point variables
+dotnet_diagnostic.S2184.severity = warning
+
+# Short-circuit logic should be used in boolean contexts
+dotnet_diagnostic.S2178.severity = warning
+
+# NullReferenceException should not be caught
+dotnet_diagnostic.S1696.severity = warning
+
+# SQL queries should not be dynamically formatted
+dotnet_diagnostic.S2077.severity = warning
+
+# Mergeable 'if' statements should be combined
+dotnet_diagnostic.S1066.severity = warning
+
+# Ternary operators should not be nested
+dotnet_diagnostic.S3358.severity = warning
+
+# Nested code blocks should not be used
+dotnet_diagnostic.S1199.severity = warning
+
+# Method overloads should be grouped together
+dotnet_diagnostic.S4136.severity = warning
+
+# Jump statements should not be redundant
+dotnet_diagnostic.S3626.severity = warning
+
+# Methods should not be empty
+dotnet_diagnostic.S1186.severity = warning
+
+# Nested blocks of code should not be left empty
+dotnet_diagnostic.S108.severity = warning
+
+# Unused type parameters should be removed
+dotnet_diagnostic.S2326.severity = warning
+
+# Methods should not have identical implementations
+dotnet_diagnostic.S4144.severity = warning
+
+# Two branches in a conditional structure should not have exactly the same implementation
+dotnet_diagnostic.S1871.severity = warning
+
+# All branches in a conditional structure should not have exactly the same implementation
+dotnet_diagnostic.S3923.severity = warning
+
+# Fields that are only assigned in the constructor should be 'readonly'
+dotnet_diagnostic.S2933.severity = warning
+
+# Trivial properties should be auto-implemented
+dotnet_diagnostic.S2292.severity = warning
+
+# Utility classes should not have public constructors
+dotnet_diagnostic.S1118.severity = warning
+
+# Local variables should not shadow class fields or properties
+dotnet_diagnostic.S1117.severity = warning
+
+# Assignments should not be made from within sub-expressions
+dotnet_diagnostic.S1121.severity = warning
+
+# 'catch' clauses should do more than rethrow
+dotnet_diagnostic.S2737.severity = warning
+
+# 'async' methods should not return 'void'
+dotnet_diagnostic.S3168.severity = warning
+
+# Awaitable method should be used
+dotnet_diagnostic.S6966.severity = warning
+
+# Logging in a catch clause should pass the caught exception as a parameter.
+dotnet_diagnostic.S6667.severity = warning
+
+# Log message template placeholders should be in the right order
+dotnet_diagnostic.S6673.severity = warning
+
 # Sonar defaults switched off
 
 # Types should be named in PascalCase
 dotnet_diagnostic.S101.severity = none
-
-# Nested blocks of code should not be left empty
-dotnet_diagnostic.S108.severity = none
 
 # General or reserved exceptions should never be thrown
 dotnet_diagnostic.S112.severity = none
@@ -55,9 +130,6 @@ dotnet_diagnostic.S1006.severity = none
 # Finalizers should not throw exceptions
 dotnet_diagnostic.S1048.severity = none
 
-# Mergeable 'if' statements should be combined
-dotnet_diagnostic.S1066.severity = none
-
 # URIs should not be hardcoded
 dotnet_diagnostic.S1075.severity = none
 
@@ -69,15 +141,6 @@ dotnet_diagnostic.S1110.severity = none
 
 # Empty statements should be removed
 dotnet_diagnostic.S1116.severity = none
-
-# Local variables should not shadow class fields or properties
-dotnet_diagnostic.S1117.severity = none
-
-# Utility classes should not have public constructors
-dotnet_diagnostic.S1118.severity = none
-
-# Assignments should not be made from within sub-expressions
-dotnet_diagnostic.S1121.severity = none
 
 # 'Obsolete' attributes should include explanations
 dotnet_diagnostic.S1123.severity = none
@@ -105,12 +168,6 @@ dotnet_diagnostic.S1168.severity = none
 
 # Overriding members should do more than simply call the same member in the base class
 dotnet_diagnostic.S1185.severity = none
-
-# Methods should not be empty
-dotnet_diagnostic.S1186.severity = none
-
-# Nested code blocks should not be used
-dotnet_diagnostic.S1199.severity = none
 
 # 'Equals(Object)' and 'GetHashCode()' should be overridden in pairs
 dotnet_diagnostic.S1206.severity = none
@@ -145,14 +202,8 @@ dotnet_diagnostic.S1656.severity = none
 # An abstract class should have both abstract and concrete methods
 dotnet_diagnostic.S1694.severity = none
 
-# NullReferenceException should not be caught
-dotnet_diagnostic.S1696.severity = none
-
 # Constructors should only call non-overridable methods
 dotnet_diagnostic.S1699.severity = none
-
-# Loops with at most one iteration should be refactored
-dotnet_diagnostic.S1751.severity = none
 
 # Identical expressions should not be used on both sides of operators
 dotnet_diagnostic.S1764.severity = none
@@ -165,9 +216,6 @@ dotnet_diagnostic.S1854.severity = none
 
 # Related 'if/else if' statements should not have the same condition
 dotnet_diagnostic.S1862.severity = none
-
-# Two branches in a conditional structure should not have exactly the same implementation
-dotnet_diagnostic.S1871.severity = none
 
 # Redundant casts should not be used
 dotnet_diagnostic.S1905.severity = none
@@ -186,9 +234,6 @@ dotnet_diagnostic.S1994.severity = none
 
 # Credentials should not be hard-coded
 dotnet_diagnostic.S2068.severity = none
-
-# SQL queries should not be dynamically formatted
-dotnet_diagnostic.S2077.severity = none
 
 # Cookies should have the 'secure' flag
 dotnet_diagnostic.S2092.severity = none
@@ -211,14 +256,8 @@ dotnet_diagnostic.S2139.severity = none
 # Classes named like 'Exception' should extend 'Exception' or a subclass
 dotnet_diagnostic.S2166.severity = none
 
-# Short-circuit logic should be used in boolean contexts
-dotnet_diagnostic.S2178.severity = none
-
 # Integral numbers should not be shifted by zero or more than their number of bits-1
 dotnet_diagnostic.S2183.severity = none
-
-# Results of integer division should not be assigned to floating point variables
-dotnet_diagnostic.S2184.severity = none
 
 # Test classes should contain at least one test case
 dotnet_diagnostic.S2187.severity = none
@@ -265,17 +304,11 @@ dotnet_diagnostic.S2290.severity = none
 # Overflow checking should not be disabled for 'Enumerable.Sum'
 dotnet_diagnostic.S2291.severity = none
 
-# Trivial properties should be auto-implemented
-dotnet_diagnostic.S2292.severity = none
-
 # 'async' and 'await' should not be used as identifiers
 dotnet_diagnostic.S2306.severity = none
 
 # Methods and properties that don't access instance data should be static
 dotnet_diagnostic.S2325.severity = none
-
-# Unused type parameters should be removed
-dotnet_diagnostic.S2326.severity = none
 
 # 'GetHashCode' should not reference mutable fields
 dotnet_diagnostic.S2328.severity = none
@@ -346,9 +379,6 @@ dotnet_diagnostic.S2699.severity = none
 # Literal boolean values should not be used in assertions
 dotnet_diagnostic.S2701.severity = none
 
-# 'catch' clauses should do more than rethrow
-dotnet_diagnostic.S2737.severity = none
-
 # Static fields should not be used in generic types
 dotnet_diagnostic.S2743.severity = none
 
@@ -369,9 +399,6 @@ dotnet_diagnostic.S2925.severity = none
 
 # 'IDisposables' should be disposed
 dotnet_diagnostic.S2930.severity = none
-
-# Fields that are only assigned in the constructor should be 'readonly'
-dotnet_diagnostic.S2933.severity = none
 
 # Property assignments should not be made for 'readonly' fields not constrained to reference types
 dotnet_diagnostic.S2934.severity = none
@@ -411,9 +438,6 @@ dotnet_diagnostic.S3060.severity = none
 
 # 'StringBuilder' data should be used
 dotnet_diagnostic.S3063.severity = none
-
-# 'async' methods should not return 'void'
-dotnet_diagnostic.S3168.severity = none
 
 # Multiple 'OrderBy' calls should not be used
 dotnet_diagnostic.S3169.severity = none
@@ -483,9 +507,6 @@ dotnet_diagnostic.S3343.severity = none
 
 # Expressions used in 'Debug.Assert' should not produce side effects
 dotnet_diagnostic.S3346.severity = none
-
-# Ternary operators should not be nested
-dotnet_diagnostic.S3358.severity = none
 
 # Date and time should not be used as a type for primary keys
 dotnet_diagnostic.S3363.severity = none
@@ -580,9 +601,6 @@ dotnet_diagnostic.S3604.severity = none
 # Nullable type comparison should not be redundant
 dotnet_diagnostic.S3610.severity = none
 
-# Jump statements should not be redundant
-dotnet_diagnostic.S3626.severity = none
-
 # 'SafeHandle.DangerousGetHandle' should not be called
 dotnet_diagnostic.S3869.severity = none
 
@@ -618,9 +636,6 @@ dotnet_diagnostic.S3903.severity = none
 
 # Assemblies should have version information
 dotnet_diagnostic.S3904.severity = none
-
-# All branches in a conditional structure should not have exactly the same implementation
-dotnet_diagnostic.S3923.severity = none
 
 # 'ISerializable' should be implemented correctly
 dotnet_diagnostic.S3925.severity = none
@@ -682,14 +697,8 @@ dotnet_diagnostic.S4061.severity = none
 # Non-flags enums should not be marked with 'FlagsAttribute'
 dotnet_diagnostic.S4070.severity = none
 
-# Method overloads should be grouped together
-dotnet_diagnostic.S4136.severity = none
-
 # Collection elements should not be replaced unconditionally
 dotnet_diagnostic.S4143.severity = none
-
-# Methods should not have identical implementations
-dotnet_diagnostic.S4144.severity = none
 
 # Classes should implement their 'ExportAttribute' interfaces
 dotnet_diagnostic.S4159.severity = none
@@ -868,9 +877,6 @@ dotnet_diagnostic.S6618.severity = none
 # Unsafe code blocks should not be used
 dotnet_diagnostic.S6640.severity = none
 
-# Logging in a catch clause should pass the caught exception as a parameter.
-dotnet_diagnostic.S6667.severity = none
-
 # Logging arguments should be passed to the correct parameter
 dotnet_diagnostic.S6668.severity = none
 
@@ -879,9 +885,6 @@ dotnet_diagnostic.S6670.severity = none
 
 # Generic logger injection should match enclosing type
 dotnet_diagnostic.S6672.severity = none
-
-# Log message template placeholders should be in the right order
-dotnet_diagnostic.S6673.severity = none
 
 # Log message template should be syntactically correct
 dotnet_diagnostic.S6674.severity = none
@@ -930,9 +933,6 @@ dotnet_diagnostic.S6964.severity = none
 
 # REST API actions should be annotated with an HTTP verb attribute
 dotnet_diagnostic.S6965.severity = none
-
-# Awaitable method should be used
-dotnet_diagnostic.S6966.severity = none
 
 # ModelState.IsValid should be called in controller actions
 dotnet_diagnostic.S6967.severity = none

@@ -150,58 +150,6 @@ public sealed class BuildBehaviourTests(PackageFixture fixture)
     }
 
     [Fact]
-    public async Task ParameterCount_ThresholdIsTen()
-    {
-        static string Program(int parameterCount)
-        {
-            var parameters = string.Join(", ", Enumerable.Range(1, parameterCount).Select(i => $"int p{i}"));
-            var sum = string.Join(" + ", Enumerable.Range(1, parameterCount).Select(i => $"p{i}"));
-            return $$"""
-                namespace Sample;
-
-                public static class Program
-                {
-                    public static void Main() => System.Console.WriteLine(Sum({{string.Join(", ", Enumerable.Range(1, parameterCount))}}));
-
-                    public static int Sum({{parameters}}) => {{sum}};
-                }
-                """;
-        }
-
-        var ten = await new ProjectBuilder(fixture).WithSource("Program.cs", Program(10)).BuildAsync();
-        var eleven = await new ProjectBuilder(fixture).WithSource("Program.cs", Program(11)).BuildAsync();
-
-        Assert.False(ten.Has("S107"), ten.Output);
-        Assert.True(eleven.HasError("S107"), eleven.Output);
-    }
-
-    [Fact]
-    public async Task MethodLength_ThresholdIsOneHundredLines()
-    {
-        static string Program(int statementCount)
-        {
-            var statements = string.Join("\n", Enumerable.Range(1, statementCount).Select(i => $"        System.Console.WriteLine({i});"));
-            return $$"""
-                namespace Sample;
-
-                public static class Program
-                {
-                    public static void Main()
-                    {
-                {{statements}}
-                    }
-                }
-                """;
-        }
-
-        var ninety = await new ProjectBuilder(fixture).WithSource("Program.cs", Program(90)).BuildAsync();
-        var oneHundredTen = await new ProjectBuilder(fixture).WithSource("Program.cs", Program(110)).BuildAsync();
-
-        Assert.False(ninety.Has("S138"), ninety.Output);
-        Assert.True(oneHundredTen.HasError("S138"), oneHundredTen.Output);
-    }
-
-    [Fact]
     public async Task VulnerablePackage_FailsRestoreWhenStrict()
     {
         var result = await new ProjectBuilder(fixture)

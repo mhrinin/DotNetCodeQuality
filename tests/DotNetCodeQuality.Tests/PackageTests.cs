@@ -37,7 +37,6 @@ public sealed class PackageTests(PackageFixture fixture)
             Assert.Contains($"configuration/{file}.globalconfig", entries);
         }
 
-        Assert.Contains("configuration/SonarLint.xml", entries);
         Assert.Contains("configuration/BannedSymbols.txt", entries);
     }
 

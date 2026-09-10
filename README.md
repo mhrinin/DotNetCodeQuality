@@ -29,7 +29,7 @@ Build. Fix what fails. That is the whole adoption procedure. For a large existin
 | Strict build | `TreatWarningsAsErrors`, NuGet vulnerability audit (NU1901-NU1904) as errors |
 | Style | braces, expression-bodied members, switch and collection expressions, primary constructors, file-scoped namespaces, `var` when apparent, target-typed `new`, using hygiene, null patterns, naming conventions, unused private members / parameters / assignments |
 | Analysis tuning | rules that fight real codebases are off: identifiers matching keywords or type names (CA1716, CA1720), `GC.SuppressFinalize` (CA1816), LoggerMessage delegates (CA1848, CA1873), indexer-over-LINQ micro-optimisation (CA1826) |
-| Sonar | SonarAnalyzer.CSharp with 33 rules on and every other default rule off. Size: cognitive complexity, method length, parameter count. Dead code: unused private members / locals / parameters / fields / type parameters, empty methods and blocks, identical methods and branches. Structure: mergeable `if`s, nested ternaries, nested blocks, non-adjacent overloads, redundant jumps. Declarations: `readonly` fields, auto-properties, `static` utility classes, shadowed fields, assignments inside expressions. Exceptions, async and logging: catch-only-rethrow, caught `NullReferenceException`, `async void`, blocking calls in async methods, exception not passed to the logger, placeholder order. Bugs: single-iteration loops, integer division into floating point, non-short-circuit boolean operators, dynamically formatted SQL. Thresholds: 100 lines per method, 10 parameters |
+| Sonar | SonarAnalyzer.CSharp with 37 rules on and every other default rule off. Size: cognitive complexity, method length, parameter count, class coupling, inheritance depth, file length, nesting depth. Dead code: unused private members / locals / parameters / fields / type parameters, empty methods and blocks, identical methods and branches. Structure: mergeable `if`s, nested ternaries, nested blocks, non-adjacent overloads, redundant jumps. Declarations: `readonly` fields, auto-properties, `static` utility classes, shadowed fields, assignments inside expressions. Exceptions, async and logging: catch-only-rethrow, caught `NullReferenceException`, `async void`, blocking calls in async methods, exception not passed to the logger, placeholder order. Bugs: single-iteration loops, integer division into floating point, non-short-circuit boolean operators, dynamically formatted SQL. Thresholds are properties, see below |
 | Banned APIs | `DateTime.Now`, `DateTimeOffset.Now`, `Task.Result`, `Task.Wait()`, `Thread.Sleep` |
 | Profiles | `App` (default), `Test` (relaxes naming, constant arrays, parameter count; detected automatically), `Library` (adds `ConfigureAwait(false)`; opt in per project) |
 
@@ -42,7 +42,14 @@ Set any of these in a `.csproj` or `Directory.Build.props`.
 | `DotNetCodeQualityStrict` | `true` | warnings as errors, audit findings as errors |
 | `DotNetCodeQualityProfile` | `App`, or `Test` when detected | `App`, `Library` or `Test`; an explicit value wins over detection |
 | `DotNetCodeQualitySonar` | `true` | `false` removes the Sonar analyzer entirely |
-| `DotNetCodeQualitySonarLintXml` | package file | path to your own `SonarLint.xml` with rule thresholds |
+| `DotNetCodeQualitySonarLintXml` | generated | path to your own rule parameter file; it replaces the threshold properties and the analyzer only reads a file named `SonarLint.xml` |
+| `DotNetCodeQualityMaxMethodLines` | `100` | S138, lines per method |
+| `DotNetCodeQualityMaxParameters` | `10` | S107, parameters per method |
+| `DotNetCodeQualityMaxCognitiveComplexity` | `15` | S3776, cognitive complexity per method |
+| `DotNetCodeQualityMaxClassCoupling` | `20` | S1200, distinct types a class depends on |
+| `DotNetCodeQualityMaxInheritanceDepth` | `5` | S110, depth of the class inheritance tree |
+| `DotNetCodeQualityMaxFileLines` | `1000` | S104, lines of code per file |
+| `DotNetCodeQualityMaxNestingDepth` | `3` | S134, nesting of control flow statements |
 | `DotNetCodeQualityBannedSymbols` | `true` | include the starter `BannedSymbols.txt`; your own `BannedSymbols.txt` files are additive |
 | `DotNetCodeQualityStyle` | `true` | include the style rules |
 

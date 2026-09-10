@@ -5,7 +5,13 @@
     <DotNetCodeQualitySonar Condition="'$(DotNetCodeQualitySonar)' == ''">true</DotNetCodeQualitySonar>
     <DotNetCodeQualityBannedSymbols Condition="'$(DotNetCodeQualityBannedSymbols)' == ''">true</DotNetCodeQualityBannedSymbols>
     <DotNetCodeQualityStyle Condition="'$(DotNetCodeQualityStyle)' == ''">true</DotNetCodeQualityStyle>
-    <DotNetCodeQualitySonarLintXml Condition="'$(DotNetCodeQualitySonarLintXml)' == ''">$(DotNetCodeQualityConfigurationDirectory)SonarLint.xml</DotNetCodeQualitySonarLintXml>
+    <DotNetCodeQualityMaxMethodLines Condition="'$(DotNetCodeQualityMaxMethodLines)' == ''">100</DotNetCodeQualityMaxMethodLines>
+    <DotNetCodeQualityMaxParameters Condition="'$(DotNetCodeQualityMaxParameters)' == ''">10</DotNetCodeQualityMaxParameters>
+    <DotNetCodeQualityMaxCognitiveComplexity Condition="'$(DotNetCodeQualityMaxCognitiveComplexity)' == ''">15</DotNetCodeQualityMaxCognitiveComplexity>
+    <DotNetCodeQualityMaxClassCoupling Condition="'$(DotNetCodeQualityMaxClassCoupling)' == ''">20</DotNetCodeQualityMaxClassCoupling>
+    <DotNetCodeQualityMaxInheritanceDepth Condition="'$(DotNetCodeQualityMaxInheritanceDepth)' == ''">5</DotNetCodeQualityMaxInheritanceDepth>
+    <DotNetCodeQualityMaxFileLines Condition="'$(DotNetCodeQualityMaxFileLines)' == ''">1000</DotNetCodeQualityMaxFileLines>
+    <DotNetCodeQualityMaxNestingDepth Condition="'$(DotNetCodeQualityMaxNestingDepth)' == ''">3</DotNetCodeQualityMaxNestingDepth>
     <DotNetCodeQualityProfile Condition="'$(DotNetCodeQualityProfile)' == '' and ('$(IsTestProject)' == 'true' or '$(TestProject)' == 'true' or '$(XunitTestProject)' == 'true')">Test</DotNetCodeQualityProfile>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
@@ -21,9 +27,32 @@
     <EditorConfigFiles Include="$(DotNetCodeQualityConfigurationDirectory)Analysis.globalconfig" Visible="false" />
     <EditorConfigFiles Include="$(DotNetCodeQualityConfigurationDirectory)Style.globalconfig" Condition="'$(DotNetCodeQualityStyle)' == 'true'" Visible="false" />
     <EditorConfigFiles Include="$(DotNetCodeQualityConfigurationDirectory)Sonar.globalconfig" Condition="'$(DotNetCodeQualitySonar)' == 'true'" Visible="false" />
-    <AdditionalFiles Include="$(DotNetCodeQualitySonarLintXml)" Condition="'$(DotNetCodeQualitySonar)' == 'true'" Visible="false" />
+    <AdditionalFiles Include="$(DotNetCodeQualitySonarLintXml)" Condition="'$(DotNetCodeQualitySonar)' == 'true' and '$(DotNetCodeQualitySonarLintXml)' != ''" Visible="false" />
     <AdditionalFiles Include="$(DotNetCodeQualityConfigurationDirectory)BannedSymbols.txt" Condition="'$(DotNetCodeQualityBannedSymbols)' == 'true'" Visible="false" />
   </ItemGroup>
+
+  <Target Name="DotNetCodeQualityGenerateSonarLintXml" BeforeTargets="CoreCompile" Condition="'$(DotNetCodeQualitySonar)' == 'true' and '$(DotNetCodeQualitySonarLintXml)' == ''">
+    <PropertyGroup>
+      <_DotNetCodeQualitySonarLintXml>$(IntermediateOutputPath)SonarLint.xml</_DotNetCodeQualitySonarLintXml>
+      <_DotNetCodeQualitySonarLintContent><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<AnalysisInput>
+  <Rules>
+    <Rule><Key>S138</Key><Parameters><Parameter><Key>max</Key><Value>$(DotNetCodeQualityMaxMethodLines)</Value></Parameter></Parameters></Rule>
+    <Rule><Key>S107</Key><Parameters><Parameter><Key>max</Key><Value>$(DotNetCodeQualityMaxParameters)</Value></Parameter></Parameters></Rule>
+    <Rule><Key>S3776</Key><Parameters><Parameter><Key>threshold</Key><Value>$(DotNetCodeQualityMaxCognitiveComplexity)</Value></Parameter></Parameters></Rule>
+    <Rule><Key>S1200</Key><Parameters><Parameter><Key>max</Key><Value>$(DotNetCodeQualityMaxClassCoupling)</Value></Parameter></Parameters></Rule>
+    <Rule><Key>S110</Key><Parameters><Parameter><Key>max</Key><Value>$(DotNetCodeQualityMaxInheritanceDepth)</Value></Parameter></Parameters></Rule>
+    <Rule><Key>S104</Key><Parameters><Parameter><Key>maximumFileLocThreshold</Key><Value>$(DotNetCodeQualityMaxFileLines)</Value></Parameter></Parameters></Rule>
+    <Rule><Key>S134</Key><Parameters><Parameter><Key>maximumNestingLevel</Key><Value>$(DotNetCodeQualityMaxNestingDepth)</Value></Parameter></Parameters></Rule>
+  </Rules>
+</AnalysisInput>]]></_DotNetCodeQualitySonarLintContent>
+    </PropertyGroup>
+    <WriteLinesToFile File="$(_DotNetCodeQualitySonarLintXml)" Lines="$(_DotNetCodeQualitySonarLintContent)" Overwrite="true" WriteOnlyWhenDifferent="true" />
+    <ItemGroup>
+      <AdditionalFiles Include="$(_DotNetCodeQualitySonarLintXml)" Visible="false" />
+      <FileWrites Include="$(_DotNetCodeQualitySonarLintXml)" />
+    </ItemGroup>
+  </Target>
 
   <Target Name="DotNetCodeQualityResolveProfile" BeforeTargets="CoreCompile">
     <PropertyGroup>

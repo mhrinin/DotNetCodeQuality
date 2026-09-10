@@ -11,6 +11,18 @@ dotnet_diagnostic.S138.severity = warning
 # Methods should not have too many parameters
 dotnet_diagnostic.S107.severity = warning
 
+# Classes should not be coupled to too many other classes
+dotnet_diagnostic.S1200.severity = warning
+
+# Inheritance tree of classes should not be too deep
+dotnet_diagnostic.S110.severity = warning
+
+# Files should not have too many lines of code
+dotnet_diagnostic.S104.severity = warning
+
+# Control flow statements 'if', 'switch', 'for', 'foreach', 'while', 'do'  and 'try' should not be nested too deeply
+dotnet_diagnostic.S134.severity = warning
+
 # Unused private types or members should be removed
 dotnet_diagnostic.S1144.severity = warning
 

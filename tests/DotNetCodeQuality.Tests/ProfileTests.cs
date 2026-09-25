@@ -23,6 +23,16 @@ public sealed class ProfileTests(PackageFixture fixture)
         }
         """;
 
+    private const string MethodWithElevenParameters = """
+        namespace Sample;
+
+        public static class Wide
+        {
+            public static int Sum(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8, int p9, int p10, int p11) =>
+                p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9 + p10 + p11;
+        }
+        """;
+
     [Fact]
     public async Task XunitV3Project_IsDetectedAsTest()
     {
@@ -116,6 +126,31 @@ public sealed class ProfileTests(PackageFixture fixture)
 
         Assert.True(result.ExitCode == 0, result.Output);
         Assert.False(result.Has("CA2007"), result.Output);
+    }
+
+    [Fact]
+    public async Task TestProfile_DisablesS107_WithoutGlobalAnalyzerKeyConflict()
+    {
+        var result = await new ProjectBuilder(fixture)
+            .WithPackage("xunit.v3", "3.2.2")
+            .WithSource("Wide.cs", MethodWithElevenParameters)
+            .BuildAsync();
+
+        Assert.True(result.ExitCode == 0, result.Output);
+        Assert.False(result.Has("S107"), result.Output);
+        Assert.DoesNotContain("MultipleGlobalAnalyzerKeys", result.Output, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public async Task LibraryProfile_HasNoGlobalAnalyzerKeyConflict()
+    {
+        var result = await new ProjectBuilder(fixture)
+            .AsLibrary()
+            .WithProperty("DotNetCodeQualityProfile", "Library")
+            .WithSource("Work.cs", AwaitWithoutConfigureAwait)
+            .BuildAsync();
+
+        Assert.DoesNotContain("MultipleGlobalAnalyzerKeys", result.Output, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]

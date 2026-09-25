@@ -1,4 +1,5 @@
 is_global = true
+global_level = 101
 
 # Test names use underscores; test data favours inline arrays and wide factory signatures
 dotnet_diagnostic.CA1707.severity = none

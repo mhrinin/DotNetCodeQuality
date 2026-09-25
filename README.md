@@ -77,7 +77,7 @@ dotnet_diagnostic.S3776.severity = none
 
 ## Precedence
 
-The package ships its rules as `.globalconfig` files at `global_level = 100`. They override the SDK's built-in analysis levels (`-100`) and lose to your `.editorconfig`, so any rule can be adjusted per repository or per folder. If you prefer your own `.globalconfig`, give it a `global_level` above 100.
+The package ships its rules as `.globalconfig` files. `Analysis`, `Style` and `Sonar` sit at `global_level = 100`; the profile file (`Profile.App`, `Profile.Library` or `Profile.Test`) sits at `global_level = 101`, so a key it sets always wins over the same key in a base file instead of being unset by Roslyn's `MultipleGlobalAnalyzerKeys` conflict resolution. All of them override the SDK's built-in analysis levels (`-100`) and lose to your `.editorconfig`, so any rule can be adjusted per repository or per folder. If you prefer your own `.globalconfig`, give it a `global_level` above 101.
 
 ## License
 

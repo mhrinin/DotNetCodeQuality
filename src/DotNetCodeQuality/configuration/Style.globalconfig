@@ -1,4 +1,5 @@
 is_global = true
+global_level = 100
 
 # Braces — always, even for single statements
 csharp_prefer_braces = true

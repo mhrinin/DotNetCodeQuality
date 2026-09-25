@@ -143,7 +143,7 @@ static List<string> ReadEnabledIds(string content)
 static string Render(SortedDictionary<string, (string Title, bool Enabled)> rules, List<string> enabled)
 {
     var builder = new StringBuilder();
-    builder.Append("is_global = true\n\n# Enabled\n\n");
+    builder.Append("is_global = true\nglobal_level = 100\n\n# Enabled\n\n");
     foreach (var id in enabled)
     {
         builder.Append($"# {rules[id].Title}\ndotnet_diagnostic.{id}.severity = warning\n\n");
